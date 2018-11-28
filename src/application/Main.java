@@ -9,6 +9,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
@@ -16,11 +17,34 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
     public static void main(String[] args) {
+
         Application.launch(args);
     }
 	@Override
 	public void start(Stage stage) {
-		Polygon hexagone = new Polygon();
+		Group group = new Group();
+    	Board board = new Board();
+    	
+		for (int i = 0; i < 4; i++)
+		{
+			for (int j = 0; j < 5; j++)
+			{
+				if (board.nodeGrid[i][j].status == 1){
+					group.getChildren().add(new Circle(
+							board.nodeGrid[i][j].X,
+							board.nodeGrid[i][j].Y,
+							5));	
+				}			
+			}
+		}
+		Scene scene = new Scene(group, 600, 300); 
+        stage.setScene(scene);
+        stage.setTitle("Nodes");
+        stage.show();
+
+	}
+}
+		/*Polygon hexagone = new Polygon();
 		Double[] coord = new Double[]{ 
 				305.0, 55.0, 
 				195.0, 55.0, 
@@ -30,7 +54,7 @@ public class Main extends Application {
 				360.0, 150.0};
 		hexagone.getPoints().addAll(coord);
 		hexagone.setFill(javafx.scene.paint.Color.BLUE);
-		System.out.println('holala');
+		
 		//Circle ville = new circle();
 		
 		
@@ -81,4 +105,4 @@ public class Main extends Application {
         stage.setTitle("Hexagone");
         stage.show();
 	}
-}
+}*/
