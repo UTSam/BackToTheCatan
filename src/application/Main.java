@@ -30,8 +30,9 @@ public class Main extends Application {
 				360.0, 150.0};
 		hexagone.getPoints().addAll(coord);
 		hexagone.setFill(javafx.scene.paint.Color.BLUE);
+	
 		
-		//Circle ville = new circle();
+		System.out.print("ma bite est un volcan");
 		
 		Line route1 = new Line(
 				coord[0] - 5,
