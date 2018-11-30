@@ -8,11 +8,23 @@ public class Map {
 	private ArrayList<Road> roadList;
 	private int mapSize;
 	private int[][] patern;
-
+	
 	public Map () {
 		mapSize=0;
 		nodeList=new Node[8][13]; //VARIABLE GLOBALE
 		roadList= new ArrayList<Road>();
+	}
+	
+	public Node getNodeFromNodeList(int X, int Y){
+		return nodeList[X][Y];		
+	}
+	
+	public int getSize() {
+		return mapSize;
+	}
+	
+	public ArrayList<Road> getroadList(){
+		return roadList;
 	}
 
 	public void setToBigSize(){
