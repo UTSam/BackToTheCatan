@@ -35,5 +35,8 @@ public class Road {
 		return node2;
 	}
 
+	public StatusRoadType getStatus() {
+		return status;
+	}
 
 }

@@ -3,6 +3,7 @@ package model;
 public class Node {
 	private int x;
 	private int y;
+	
 	private StatusNodeType status;
 
 	public Node(int x, int y,StatusNodeType status){
@@ -28,5 +29,4 @@ public class Node {
 	public int getY(){
 		return y;
 	}
-
 }

@@ -35,13 +35,15 @@ public class Main  extends Application{
     	map.setToBigSize();
 		map.generateMap();
 		map.printRoad();
+		map.printTile();
 		
-		
+		//Displaying the board
+		Board board = new Board(50, 50, 70);
 		mainMenu = primaryStage;
 		mainMenu.setTitle("MainMenu");
 		
 		startButton = new Button("START");
-		startButton.setOnAction( e -> Board.display(map));
+		startButton.setOnAction( e -> board.display(map));
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(startButton);
 		layout.setAlignment(Pos.CENTER);
