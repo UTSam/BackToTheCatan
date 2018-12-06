@@ -4,14 +4,14 @@ import java.util.ArrayList;
 
 public class Tile {
 	private ArrayList<Node> nodeList;
-	private StatusTileType type;
+	private Resource type;
 	private boolean thief;
+	private int number;
+
 
 	public Tile(){
 	nodeList= new ArrayList<Node>();
-	type=StatusTileType.SEA;
 	thief=false;
-
 	}
 
 	public ArrayList<Node> getNodeList(){
@@ -22,6 +22,10 @@ public class Tile {
 		nodeList.add(node);
 	}
 
+	public void setType(Resource type){
+		this.type=type;
+	}
+
 	public boolean getThief(){
 		return thief;
 	}
@@ -30,6 +34,17 @@ public class Tile {
 		this.thief=thief;
 	}
 
+	public void setNumber(int number){
+		this.number=number;
+	}
+
+	public int getNumber(){
+		return number;
+	}
+
+	public ResourceType getResourceType(){
+		return type.getType();
+	}
 
 }
 

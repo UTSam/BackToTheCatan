@@ -10,6 +10,8 @@ import model.Node;
 import model.Road;
 import model.Tile;
 
+//Gère l'affichage lié à chaque tuile
+
 public class TileView {
 	
 	private Tile tile;
@@ -32,7 +34,8 @@ public class TileView {
 				pnodeViewList.get(4).getY(),
 				pnodeViewList.get(3).getX(),
 				pnodeViewList.get(3).getY());
-		hexagon.setFill(Color.BLACK);
+		refreshColor();
+		
 		hexagon.addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
@@ -51,6 +54,38 @@ public class TileView {
 	            					+ pnodeViewList.get(5).getNode().getY() );
 	          }
 	        });
+	}
+	
+	void refreshColor(){
+
+		switch (tile.getResourceType()) {
+		case COAL:
+			hexagon.setFill(Color.BLACK);
+			break;
+		case FOOD:
+			hexagon.setFill(Color.DARKOLIVEGREEN);
+			break;
+		case GOLD:
+			hexagon.setFill(Color.YELLOW);
+			break;
+		case METAL: hexagon.setFill(Color.GREY);
+			break;
+		case MOUNTAIN:
+			hexagon.setFill(Color.WHITE);
+			break;
+		case OIL: hexagon.setFill(Color.DARKGREY);
+			break;
+		case PLUTONIUM: hexagon.setFill(Color.LIMEGREEN);
+			break;
+		case SEA: hexagon.setFill(Color.LIGHTSKYBLUE);
+			break;
+		case WOOD: hexagon.setFill(Color.SADDLEBROWN);
+			break;
+		default:
+			break;
+
+		}
+
 	}
 	
 	Polygon getHexagon() {

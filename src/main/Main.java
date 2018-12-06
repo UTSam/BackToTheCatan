@@ -16,8 +16,9 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import model.Game;
 import model.Map;
-import view.Board;
+import view.GameView;
 
 public class Main  extends Application{
 	
@@ -31,19 +32,20 @@ public class Main  extends Application{
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		//Generation of the map
-		Map map= new Map();
+		Game game= new Game();
+		game.Run();
+		/*Map map= new Map();
     	map.setToBigSize();
-		map.generateMap();
-		map.printRoad();
-		map.printTile();
+		map.generateMap();*/
+
 		
 		//Displaying the board
-		Board board = new Board(50, 50, 70);
+		GameView gameView = new GameView(game.getMapList());
 		mainMenu = primaryStage;
 		mainMenu.setTitle("MainMenu");
-		
+	
 		startButton = new Button("START");
-		startButton.setOnAction( e -> board.display(map));
+		startButton.setOnAction( e -> gameView.generate());
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(startButton);
 		layout.setAlignment(Pos.CENTER);
