@@ -4,12 +4,14 @@ import java.util.ArrayList;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.event.EventHandler;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -25,6 +27,7 @@ public class GameView {
 	
 	ArrayList<Map> mapList;
 	ArrayList<MapView> mapViewList;
+	WorldMap worldMap;
 	
 	BorderPane borderPane;
 	Stage gameWindow;
@@ -36,6 +39,8 @@ public class GameView {
 		for (Map m : mapList) {
 			mapViewList.add(new MapView(m));
 		}
+		worldMap = new WorldMap(mapViewList);
+		generateWorldMap();
 		
 		borderPane = new BorderPane();
 		gameWindow = new Stage();
@@ -46,14 +51,13 @@ public class GameView {
 	
 
 	public void generate() {
-
 		
 		for (MapView mv : mapViewList) {
 			mv.generate();
 		}
-		/*GlobalMap globalMap = new GlobalMap(mapViewList);
-		globalMap.generate();*/
-		generateDateButtons();
+		
+		worldMap.generate();
+		setMapView(worldMap);
 		
 		gameWindow.show();
 		gameWindow.setMaximized(true);
@@ -62,33 +66,52 @@ public class GameView {
 	
 		
 		//GENERATION DES ELEMENTS DE L'IINTERFACE------------------------------------------------------
-		private void generateDateButtons() {
-		
-		HBox dateHBox = new HBox();
-		
-		Button b1850 = new Button("1850");
-		Button b1955 = new Button("1955");
-		Button b1985 = new Button("1985");
-		Button b2015 = new Button("2015");
-		
-		b1850.setPrefSize(250, 100);
-		b1955.setPrefSize(250, 100);
-		b1985.setPrefSize(250, 100);
-		b2015.setPrefSize(250, 100);
-
-		b1850.setOnAction( e -> setMapView(mapViewList.get(0)));
-		b1955.setOnAction( e -> setMapView(mapViewList.get(1)));
-		b1985.setOnAction( e -> setMapView(mapViewList.get(2)));
-		b2015.setOnAction( e -> setMapView(mapViewList.get(3)));
-			
-		dateHBox.getChildren().addAll(b1850, b1955, b1985, b2015);
-		dateHBox.setAlignment(Pos.CENTER);
-		dateHBox.setSpacing(25);
-		
-		borderPane.setBottom(dateHBox);
-	}
 	
 	private void setMapView(MapView mapView) {
-		borderPane.setCenter(mapView.borderPane);
+		borderPane.setCenter(mapView.getBorderPane());
+	}
+	
+	private void setMapView(WorldMap worldMap) {
+		borderPane.setCenter(worldMap.getGridPane());
+	}
+	
+	private void generateWorldMap(){
+		
+		worldMap.getMap1Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
+		        new EventHandler<MouseEvent>() {
+	          public void handle(MouseEvent me) {
+	        	  setMapView(mapViewList.get(0));
+	          }
+	        });
+		
+		worldMap.getMap2Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
+		        new EventHandler<MouseEvent>() {
+	          public void handle(MouseEvent me) {
+	        	  setMapView(mapViewList.get(1));
+	          }
+	        });
+		
+		worldMap.getMap3Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
+		        new EventHandler<MouseEvent>() {
+	          public void handle(MouseEvent me) {
+	        	  setMapView(mapViewList.get(2));
+	          }
+	        });
+		
+		worldMap.getMap4Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
+		        new EventHandler<MouseEvent>() {
+	          public void handle(MouseEvent me) {
+	        	  setMapView(mapViewList.get(3));
+	          }
+	        });
+		
+		for (MapView mv : mapViewList) {
+			mv.getBackButton().addEventHandler(MouseEvent.MOUSE_PRESSED,
+			        new EventHandler<MouseEvent>() {
+		          public void handle(MouseEvent me) {
+		        	  setMapView(worldMap);
+		          }
+		        });
+		}
 	}
 }

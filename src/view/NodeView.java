@@ -16,15 +16,20 @@ public class NodeView {
 	private int X;
 	private int Y;
 	private Circle circle;
+	private Circle smallCircle;
 	private int radius;
+	private int scale;
+	
 	
 	NodeView(Node pnode, int pX, int pY) {
 		radius = 20;
+		scale = 2;
 		node = pnode;
 		X = pX;
 		Y = pY;
 		circle = new Circle(pX, pY, radius);
-		this.refreshColor();
+		smallCircle = new Circle(pX/scale, pY/scale, radius/scale);
+		refreshColor();
 		
 		circle.addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
@@ -52,11 +57,17 @@ public class NodeView {
 		return circle;
 	}
 	
+	public Circle getSmallCircle() {
+		return smallCircle;
+	}
+	
 	void refreshColor(){
 		switch (node.getStatus()) {
 			case EMPTY:
 			circle.setFill(Color.WHITE);
 			circle.setStroke(Color.BLACK);
+			smallCircle.setFill(Color.WHITE);
+			smallCircle.setStroke(Color.BLACK);
 				break;
 			case PLAYER1:
 				break;
@@ -68,6 +79,7 @@ public class NodeView {
 				break;
 			case SEA:
 			circle.setFill(Color.TRANSPARENT);
+			smallCircle.setFill(Color.TRANSPARENT);
 				break;
 			default:
 				break;

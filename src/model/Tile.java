@@ -45,6 +45,9 @@ public class Tile {
 	public ResourceType getResourceType(){
 		return type.getType();
 	}
-
+	
+	public Resource getResource(){
+		return type;
+	}
 }
 
