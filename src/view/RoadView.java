@@ -14,6 +14,9 @@ public class RoadView {
 	private NodeView nodeView2;
 	private Line line;
 	private Line underLine;
+	private Line smallLine;
+	private Line smallUnderLine;
+	private int scale;
 	
 	private int width;
 	
@@ -22,13 +25,19 @@ public class RoadView {
 		nodeView1 = n1;
 		nodeView2 = n2;
 		width = 12;
+		scale = 2;
 		line = new Line(nodeView1.getX(), nodeView1.getY(), nodeView2.getX(), nodeView2.getY());
 		line.setStrokeWidth(width);
-		this.refreshColor();
+		smallLine = new Line(nodeView1.getX()/scale, nodeView1.getY()/scale, nodeView2.getX()/scale, nodeView2.getY()/scale);
+		smallLine.setStrokeWidth(width/4);
+
 		
 		underLine = new Line(nodeView1.getX(), nodeView1.getY(), nodeView2.getX(), nodeView2.getY());
 		underLine.setStrokeWidth(width+4);
-		underLine.setStroke(Color.BLACK);
+		smallUnderLine = new Line(nodeView1.getX()/scale, nodeView1.getY()/scale, nodeView2.getX()/scale, nodeView2.getY()/scale);
+		smallUnderLine.setStrokeWidth((width+2)/scale);
+
+		refreshColor();
 		
 		line.addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
@@ -51,11 +60,22 @@ public class RoadView {
 		return line;
 	}
 	
+	public Line getSmallUnderLine() {
+		return smallUnderLine;
+	}
+	
+	public Line getSmallLine() {
+		return smallLine;
+	}
+	
 	void refreshColor(){
 
 		switch (road.getStatus()) {
 		case EMPTY:
 			line.setStroke(Color.WHITE);
+			underLine.setStroke(Color.BLACK);
+			smallLine.setStroke(Color.WHITE);
+			smallUnderLine.setStroke(Color.BLACK);
 			break;
 		case PLAYER1:
 			break;
