@@ -1,30 +1,19 @@
 package model;
 
 public class ResourceInventory {
-	private ResourceType type;
 	private int food;
 	private int gold;
 	private int energy;
 	private int construction;
-	
+
 	public ResourceInventory(){
 	}
 
-	public ResourceInventory(ResourceType type, int food, int gold, int energy, int construction) {
-		super();
-		this.type = type;
+	public ResourceInventory(int food, int gold, int energy, int construction) {
 		this.food = food;
 		this.gold = gold;
 		this.energy = energy;
 		this.construction = construction;
-	}
-
-	public ResourceType getType() {
-		return type;
-	}
-
-	public void setType(ResourceType type) {
-		this.type = type;
 	}
 
 	public int getFood() {
@@ -35,12 +24,20 @@ public class ResourceInventory {
 		this.food = food;
 	}
 
+	public void addFood(int food) {
+		this.food += food;
+	}
+
 	public int getGold() {
 		return gold;
 	}
 
 	public void setGold(int gold) {
 		this.gold = gold;
+	}
+
+	public void addGold(int gold) {
+		this.gold += gold;
 	}
 
 	public int getEnergy() {
@@ -51,6 +48,10 @@ public class ResourceInventory {
 		this.energy = energy;
 	}
 
+	public void addEnergy(int energy) {
+		this.energy += energy;
+	}
+
 	public int getConstruction() {
 		return construction;
 	}
@@ -59,7 +60,11 @@ public class ResourceInventory {
 		this.construction = construction;
 	}
 
-	public void addResource(int nb) {
+	public void addConstruction(int construction) {
+		this.construction += construction;
+	}
+
+	/*public void addResource(int nb) {
 		switch(this.type) {
 
 			case FOOD : food+=nb;
@@ -72,7 +77,7 @@ public class ResourceInventory {
 			break;
 			default:
 			break;
-		
+
 		}
 	}
 	public void removeResource(int nb) {
@@ -85,9 +90,9 @@ public class ResourceInventory {
 		break;
 		case ENERGY: energy-= nb;
 		break;
-		default: 
+		default:
 		break;
-	
-	}
+
+	}*/
 
 }

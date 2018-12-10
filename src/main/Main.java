@@ -21,10 +21,10 @@ import model.Map;
 import view.GameView;
 
 public class Main  extends Application{
-	
+
 	Stage mainMenu;
 	Button startButton;
-	
+
     public static void main(String[] args) {
 		launch(args);
     }
@@ -33,27 +33,27 @@ public class Main  extends Application{
 	public void start(Stage primaryStage) throws Exception {
 		//Generation of the map
 		Game game= new Game();
-		game.Run();
+		//game.Run();
 		/*Map map= new Map();
     	map.setToBigSize();
 		map.generateMap();*/
 
-		
+
 		//Displaying the board
 		GameView gameView = new GameView(game.getMapList());
 		mainMenu = primaryStage;
 		mainMenu.setTitle("MainMenu");
-	
+
 		startButton = new Button("START");
 		startButton.setOnAction( e -> gameView.generate());
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(startButton);
 		layout.setAlignment(Pos.CENTER);
-		
+
 		Scene scene = new Scene(layout, 600, 300);
 		mainMenu.setScene(scene);
 		mainMenu.show();
-		
+
 
 	}
 }

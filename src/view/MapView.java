@@ -15,23 +15,23 @@ import model.Road;
 import model.Tile;
 
 public class MapView {
-	
+
 	//Largeur hexagone
 	private int length;
-	
+
 	private Map map;
-	
+
 	private ArrayList<TileView> tileViewList;
-	private ArrayList<NodeView> nodeViewList; 
+	private ArrayList<NodeView> nodeViewList;
 	private ArrayList<RoadView> roadViewList;
-	
+
 	private BorderPane borderPane;
 	private Group mapGroup;
 	private Button backButton;
-	
 
-	
-	
+
+
+
 	public MapView(Map pmap) {
 		map = pmap;
 		borderPane = new BorderPane();
@@ -40,26 +40,26 @@ public class MapView {
 		backButton.setPrefSize(200, 100);
 		backButton.setLayoutX(50);
 		backButton.setLayoutY(100);
-		
+
 		tileViewList = new ArrayList<TileView>();
 		nodeViewList = new ArrayList<NodeView>();
 		roadViewList = new ArrayList<RoadView>();
 	}
-	
-	
+
+
 	void generate() {
-		
+
 		length = 80;
-		
+
 		generateNodeViewList(map);
 		generateRoadViewList(map);
 		generateTileViewList(map);
-				
+
 		Group mapGroup = new Group();
 		printTiles(mapGroup);
 		printRoads(mapGroup);
 		printNodes(mapGroup);
-		
+
 		borderPane.setCenter(mapGroup);
 		borderPane.setLeft(backButton);
 	}
@@ -68,22 +68,22 @@ public class MapView {
 
 	//GENERATION DES VIEW LISTS--------------------------------------------------------------------
 	private void generateNodeViewList(Map map) {
-		
+
 		Node tmpNode;
 		NodeView tmpNodeView = null;
-		
+
 		int deltaLengthX = length*86/100;
 		int deltaPosY = length/2;
-		
-		
-		for (int i = 0; i < map.getSize()+3; i++){
-			for(int j = 0; j < map.getSize()*2+5; j++){
-				
+
+
+		for (int i = 0; i < 8; i++){
+			for(int j = 0; j < 15; j++){
+
 				tmpNode = map.getNodeFromNodeList(i, j);
 					if ((i%2 == 0)&&(j%2 == 1)){
 						tmpNodeView = new NodeView(
 								tmpNode,
-								tmpNode.getY()*deltaLengthX, 
+								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*(length+deltaPosY)+deltaPosY);
 						//tmpNodeView.getCircle().setFill(Color.BLUE);
 					}
@@ -96,46 +96,46 @@ public class MapView {
 					if ((i%2 == 1)&&(j%2 == 1)){
 						tmpNodeView = new NodeView(
 								tmpNode,
-								tmpNode.getY()*deltaLengthX, 
+								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY-deltaPosY);
 						//tmpNodeView.getCircle().setFill(Color.RED);
 					}
 					if ((i%2 == 1)&&(j%2 == 0)){
 						tmpNodeView = new NodeView(
 								tmpNode,
-								tmpNode.getY()*deltaLengthX, 
+								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY);
 						//tmpNodeView.getCircle().setFill(Color.YELLOW);
 					}
 				nodeViewList.add(tmpNodeView);
-			}	
+			}
 		}
 	}
 
 	private void generateRoadViewList(Map map) {
-		
+
 		RoadView tmpRoadView = null;
-		
+
 		for (Road tmpRoad : map.getRoadList()) {
 			tmpRoadView = new RoadView(
 					tmpRoad,
-					NodeView.getNodeViewByNode(tmpRoad.getNode1(), nodeViewList), 
+					NodeView.getNodeViewByNode(tmpRoad.getNode1(), nodeViewList),
 					NodeView.getNodeViewByNode(tmpRoad.getNode2(), nodeViewList));
 			roadViewList.add(tmpRoadView);
 		}
 	}
-		
+
 	private void generateTileViewList(Map map) {
-		
+
 		TileView tmpTileView;
-		
+
 		for (Tile tmpTile : map.getTileList()) {
 			tmpTileView = new TileView(
 					tmpTile,
 					NodeView.getNodeViewListFromTile(tmpTile, nodeViewList));
 			tileViewList.add(tmpTileView);
 		}
-		
+
 	}
 
 	//AFFICHAGE DES OBJETS-----------------------------------------------------------------------
@@ -147,42 +147,42 @@ public class MapView {
 	}
 
 	void printRoads(Group group){
-		
-		for (RoadView tmpRoadView : roadViewList) {	
+
+		for (RoadView tmpRoadView : roadViewList) {
 			group.getChildren().add(tmpRoadView.getUnderLine());
 			group.getChildren().add(tmpRoadView.getLine());
 		}
-		
+
 	}
 
 	void printNodes(Group group){
-		
+
 		for (NodeView tmpNodeView : nodeViewList){
-			
+
 			group.getChildren().add(tmpNodeView.getCircle());
 		}
 	}
-	
+
 	//GETERS------------------------------------------------------------------------------------
 	public ArrayList<NodeView> getNodeViewList() {
 		return nodeViewList;
 	}
-	
+
 	public ArrayList<RoadView> getRoadViewList() {
 		return roadViewList;
 	}
-	
+
 	public ArrayList<TileView> getTileViewList() {
 		return tileViewList;
 	}
-	
+
 	public BorderPane getBorderPane() {
 		return borderPane;
 	}
-	
+
 	public Button getBackButton() {
 		return backButton;
 	}
 }
-	
-	
+
+

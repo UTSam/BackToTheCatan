@@ -32,6 +32,21 @@ public class Map {
 		tileRepartition=new int[] {woodQuantity,coalQuantity,foodQuantity,metalQuantity,oilQuantity,plutoniumQuantity,GoldQuantity,1};
 	}
 
+	public Map (String name, int size, int woodQuantity, int coalQuantity, int foodQuantity, int metalQuantity, int oilQuantity, int plutoniumQuantity, int GoldQuantity){
+		nodeList=new Node[8][15]; //TODO VARIABLE GLOBALE
+		roadList= new ArrayList<Road>();
+		tileList= new ArrayList<Tile>();
+		this.name=name;
+		if (size==5){
+			setToBigSize();
+		}
+		else {
+			setToSmallSize();
+		}
+		/* The 1 at the end represent the quantity of mountain*/
+		tileRepartition=new int[] {woodQuantity,coalQuantity,foodQuantity,metalQuantity,oilQuantity,plutoniumQuantity,GoldQuantity,1};
+	}
+
 	public void setToBigSize(){
 		mapSize=5;
 		patern = new int[][]{
@@ -50,12 +65,12 @@ public class Map {
 		mapSize=4;
 		patern = new int[][]{
 			  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
-			  {0,0,0,0,0,1,1,1,1,1,0,0,0,0,0},
-			  {0,0,0,0,1,1,1,1,1,1,1,0,0,0,0},
-			  {0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},
-			  {0,0,0,1,1,1,1,1,1,1,1,1,0,0,0},
-			  {0,0,0,0,1,1,1,1,1,1,1,0,0,0,0},
-			  {0,0,0,0,0,1,1,1,1,1,0,0,0,0,0},
+			  {0,0,0,0,1,1,1,1,1,0,0,0,0,0,0},
+			  {0,0,0,1,1,1,1,1,1,1,0,0,0,0,0},
+			  {0,0,1,1,1,1,1,1,1,1,1,0,0,0,0},
+			  {0,0,1,1,1,1,1,1,1,1,1,0,0,0,0},
+			  {0,0,0,1,1,1,1,1,1,1,0,0,0,0,0},
+			  {0,0,0,0,1,1,1,1,1,0,0,0,0,0,0},
 			  {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0},
 			};
 	}
@@ -69,7 +84,6 @@ public class Map {
 
 	public void generateNodeList () {
 		int i,j;
-		//int max=mapSize*2+3;
 
 		for (i=0;i<nodeList.length;i++){
 			for(j=0;j<nodeList[i].length;j++){
@@ -158,8 +172,10 @@ public class Map {
 
 		}
 
+		int initialThiefPosition=(int) (Math.random()*max); /* The counter for the initial position of the thief */
 		int rand,rand2,i=0,j=0;
 		boolean isSeaTile;
+
 		for(Tile tile : tileList){
 			isSeaTile=false;
 
@@ -167,6 +183,7 @@ public class Map {
 			for(Node node:tile.getNodeList()){
 				if(node.getStatus()==StatusNodeType.SEA) isSeaTile=true;
 			}
+
 			if (isSeaTile){
 				for(Resource resource: resourceList){
 					if(resource.getType()==ResourceType.SEA){
@@ -184,9 +201,13 @@ public class Map {
 					tile.setType(resourceList.get(rand));
 					j++;
 				}
+
+				if(initialThiefPosition==0) {
+					tile.setThief(true);
+					initialThiefPosition--;
+				}
+				else initialThiefPosition--;
 			}
-
-
 
 			/* Setting of the value of the tile */ 						/* TODO CHECK OPTIMISATION ET A TESTER SUR PETITE MAP*/
 			if(tile.getResourceType()!=ResourceType.SEA && tile.getResourceType()!=ResourceType.MOUNTAIN){
@@ -202,6 +223,21 @@ public class Map {
 			}
 		}
 	}
+
+	/* Function that returns the list of tiles with the corresponding number */
+	public ArrayList<Tile> getTilesFromNumber(int number){
+
+		ArrayList<Tile> tileListNumber = new ArrayList<Tile>();
+
+		for(Tile tile:tileList){
+			if(tile.getNumber()==number){
+				tileListNumber.add(tile);
+			}
+		}
+
+		return tileListNumber;
+	}
+
 
 	public int getSize() {
 		return mapSize;
