@@ -25,9 +25,11 @@ public class MapView {
 	private ArrayList<NodeView> nodeViewList;
 	private ArrayList<RoadView> roadViewList;
 
+
 	private BorderPane borderPane;
 	private Group mapGroup;
 	private Button backButton;
+	private PlayerBar playerBar;
 
 
 
@@ -137,6 +139,7 @@ public class MapView {
 		}
 
 	}
+	
 
 	//AFFICHAGE DES OBJETS-----------------------------------------------------------------------
 	void printTiles (Group group) {

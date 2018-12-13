@@ -25,28 +25,35 @@ import model.Map;
 
 public class GameView {
 	
-	ArrayList<Map> mapList;
-	ArrayList<MapView> mapViewList;
-	WorldMap worldMap;
+	private Game game;
 	
-	BorderPane borderPane;
-	Stage gameWindow;
-	Scene scene;
+	private ArrayList<MapView> mapViewList;
+	private ArrayList<PlayerView> playerViewList;
+	private WorldMap worldMap;
+	private PlayerBar playerBar;
+	private ActionBar actionBar;
+	
+	private BorderPane borderPane;
+	private Stage gameWindow;
+	private Scene scene;
 
-	public GameView(ArrayList<Map> pmapList){
-		mapList = pmapList;
+	public GameView(Game g){
+		game = g;
+		
 		mapViewList = new ArrayList<MapView>();
-		for (Map m : mapList) {
+		for (Map m : game.getMapList()) {
 			mapViewList.add(new MapView(m));
 		}
 		worldMap = new WorldMap(mapViewList);
 		generateWorldMap();
 		
+		playerViewList = new ArrayList<PlayerView>();
 		borderPane = new BorderPane();
 		gameWindow = new Stage();
 		gameWindow.setTitle("gameWindow");
 		scene = new Scene(borderPane, 2000, 1000);
 		gameWindow.setScene(scene);
+		
 	}
 	
 
@@ -58,6 +65,9 @@ public class GameView {
 		
 		worldMap.generate();
 		setMapView(worldMap);
+		
+		generatePlayerBar();
+		generateActionBar();
 		
 		gameWindow.show();
 		gameWindow.setMaximized(true);
@@ -113,5 +123,22 @@ public class GameView {
 		          }
 		        });
 		}
+	}
+	private void generatePlayerBar() {
+		PlayerView p1View = new PlayerView(game.getPlayerList().get(0), Color.RED);
+		PlayerView p2View = new PlayerView(game.getPlayerList().get(1), Color.BLUE);
+		PlayerView p3View = new PlayerView(game.getPlayerList().get(2), Color.GREEN);
+		PlayerView p4View = new PlayerView(game.getPlayerList().get(3), Color.YELLOW);
+		playerViewList.add(p1View);
+		playerViewList.add(p2View);
+		playerViewList.add(p3View);
+		playerViewList.add(p4View);
+		playerBar = new PlayerBar(playerViewList);
+		borderPane.setRight(playerBar.getPlayerVBox());
+	}
+	
+	private void generateActionBar() {
+		actionBar = new ActionBar();
+		borderPane.setLeft(actionBar.getActionVBox());
 	}
 }

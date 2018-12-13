@@ -96,6 +96,10 @@ public class Game {
 	public ArrayList<Map> getMapList(){
 		return mapList;
 	}
+	
+	public ArrayList<Player> getPlayerList(){
+		return playerList;
+	}
 
 
 

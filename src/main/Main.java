@@ -40,7 +40,8 @@ public class Main  extends Application{
 
 
 		//Displaying the board
-		GameView gameView = new GameView(game.getMapList());
+		//GameView gameView = new GameView(game.getMapList());
+		GameView gameView = new GameView(game);
 		mainMenu = primaryStage;
 		mainMenu.setTitle("MainMenu");
 
