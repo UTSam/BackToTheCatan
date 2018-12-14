@@ -13,6 +13,7 @@ public class Player {
 	public Player(int id, String name) {
 		this.id = id;
 		this.name = name;
+		resourceInventory = new ResourceInventory();
 		score=0;
 	}
 

@@ -132,6 +132,9 @@ public class Game {
 		return playerList;
 	}
 
+	public Player getCurrentPlayer() {
+		return playerTurn;
+	}
 
 
 	private void initializeResourceList(){
@@ -147,7 +150,6 @@ public class Game {
 		resourceList.add(new Resource(ResourceType.MOUNTAIN,0,0,0,0));
 		resourceList.add(new Resource(ResourceType.SEA,0,0,0,0));
 	}
-
 
 
 

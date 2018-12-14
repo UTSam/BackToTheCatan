@@ -11,7 +11,13 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollBar;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -49,6 +55,11 @@ public class GameView {
 		
 		playerViewList = new ArrayList<PlayerView>();
 		borderPane = new BorderPane();
+		/*BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
+		BackgroundImage bi = new BackgroundImage(new Image("file:BackToTheCatan/ressources/blue_background.jpg"),
+		        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
+		          bSize);
+		borderPane.setBackground(new Background(bi));*/
 		gameWindow = new Stage();
 		gameWindow.setTitle("gameWindow");
 		scene = new Scene(borderPane, 2000, 1000);
@@ -126,10 +137,10 @@ public class GameView {
 	}
 	private void generatePlayerBar() {
 		
-		PlayerView p1View = new PlayerView(game.getPlayerList().get(0), Color.RED);
-		PlayerView p2View = new PlayerView(game.getPlayerList().get(1), Color.BLUE);
-		PlayerView p3View = new PlayerView(game.getPlayerList().get(2), Color.GREEN);
-		PlayerView p4View = new PlayerView(game.getPlayerList().get(3), Color.YELLOW);
+		PlayerView p1View = new PlayerView(game.getPlayerList().get(0), Color.RED, this);
+		PlayerView p2View = new PlayerView(game.getPlayerList().get(1), Color.BLUE, this);
+		PlayerView p3View = new PlayerView(game.getPlayerList().get(2), Color.GREEN, this);
+		PlayerView p4View = new PlayerView(game.getPlayerList().get(3), Color.YELLOW, this);
 		playerViewList.add(p1View);
 		playerViewList.add(p2View);
 		playerViewList.add(p3View);
@@ -139,7 +150,17 @@ public class GameView {
 	}
 	
 	private void generateActionBar() {
-		actionBar = new ActionBar();
+		actionBar = new ActionBar(this);
 		borderPane.setLeft(actionBar.getActionVBox());
+		
+		
+	}
+	
+	// GETERS
+	public Game getGame() {
+		return game;
+	}
+	public ArrayList<PlayerView> getPlayerViewList() {
+		return playerViewList;
 	}
 }

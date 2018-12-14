@@ -6,9 +6,14 @@ public class ResourceInventory {
 	private int energy;
 	private int construction;
 
-	public ResourceInventory(){
+	public ResourceInventory() {
+		this.food = 0;
+		this.gold = 0;
+		this.energy = 0;
+		this.construction = 0;
 	}
-
+	
+	
 	public ResourceInventory(int food, int gold, int energy, int construction) {
 		this.food = food;
 		this.gold = gold;

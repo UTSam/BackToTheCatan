@@ -3,16 +3,20 @@ package view;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
+import model.Game;
 
 public class ActionBar {
 	
+	private GameView gameView;
 	private VBox actionVBox;
 	private Button buildRoadButton;
 	private Button buildDeloreanButton;
 	private Button buildConverterButton;
 	private Button nextTurnButton;
 	
-	public ActionBar() {
+	
+	public ActionBar(GameView gv) {
+		gameView = gv;
 		actionVBox = new VBox();
 		actionVBox.setSpacing(50);
 		actionVBox.setAlignment(Pos.CENTER);
@@ -30,7 +34,12 @@ public class ActionBar {
 		buildRoadButton.setOnAction( e -> System.out.println("road"));
 		buildDeloreanButton.setOnAction( e -> System.out.println("delorean"));
 		buildConverterButton.setOnAction( e -> System.out.println("converter"));
-		nextTurnButton.setOnAction( e -> System.out.println("next turn"));
+		nextTurnButton.setOnAction( e -> {
+			gameView.getGame().nextPlayer();
+			for (PlayerView pv : gameView.getPlayerViewList()) {
+				pv.refresh();
+			}
+		} );
 		
 		actionVBox.getChildren().addAll(buildRoadButton, buildDeloreanButton, buildConverterButton, nextTurnButton);
 	}

@@ -10,7 +10,7 @@ public class PlayerBar {
 	
 	public PlayerBar(ArrayList<PlayerView> pvList){
 		playerVBox = new VBox();
-		playerVBox.setAlignment(Pos.CENTER);
+		playerVBox.setAlignment(Pos.CENTER_RIGHT);
 		for (PlayerView pv : pvList) {
 			playerVBox.getChildren().add(pv.getGridPane());
 		}
