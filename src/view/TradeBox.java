@@ -1,5 +1,7 @@
 package view;
 
+import java.util.ArrayList;
+
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,7 +27,7 @@ public class TradeBox {
 	static int nbEnergy2=0;
 	static int nbConstruction2=0;
 	
-	public static void display(Player p1, Player p2) {
+	public static void display(Player p1, Player p2, ArrayList<PlayerView> pvList) {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setWidth(600);
@@ -53,7 +55,30 @@ public class TradeBox {
 		
 		Button validateButton = new Button("Confirmer");
 		validateButton.setPrefSize(200, 100);
-		validateButton.setOnAction(e -> window.close());
+		validateButton.setOnAction(e -> {
+			p1.getResourceInventory().addEnergy(nbEnergy2);
+			p1.getResourceInventory().addFood(nbFood2);
+			p1.getResourceInventory().addGold(nbGold2);
+			p1.getResourceInventory().addConstruction(nbConstruction2);
+			p1.getResourceInventory().addEnergy(-nbEnergy1);
+			p1.getResourceInventory().addFood(-nbFood1);
+			p1.getResourceInventory().addGold(-nbGold1);
+			p1.getResourceInventory().addConstruction(-nbConstruction1);
+			
+			p2.getResourceInventory().addEnergy(nbEnergy1);
+			p2.getResourceInventory().addFood(nbFood1);
+			p2.getResourceInventory().addGold(nbGold1);
+			p2.getResourceInventory().addConstruction(nbConstruction1);
+			p2.getResourceInventory().addEnergy(-nbEnergy2);
+			p2.getResourceInventory().addFood(-nbFood2);
+			p2.getResourceInventory().addGold(-nbGold2);
+			p2.getResourceInventory().addConstruction(-nbConstruction2);
+			
+			for (PlayerView pv : pvList) {
+				pv.refresh();
+			}
+			window.close();
+		});
 		
 		Label p1Name = new Label(p1.getName());
 		p1Name.setFont(Font.font("Cambria", 20));

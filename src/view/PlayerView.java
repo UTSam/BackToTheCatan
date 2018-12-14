@@ -71,7 +71,7 @@ public class PlayerView {
 		
 		tradeButton = new Button("Echanger");
 		tradeButton.setPrefSize(80, 30);
-		tradeButton.setOnAction(e -> TradeBox.display(gameView.getGame().getCurrentPlayer(), player));
+		tradeButton.setOnAction(e -> TradeBox.display(gameView.getGame().getCurrentPlayer(), player, gameView.getPlayerViewList()));
 		
 		gridPane.setPadding(new Insets(10, 10, 10, 10));
 		gridPane.setHgap(30);
