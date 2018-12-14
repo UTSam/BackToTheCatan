@@ -28,10 +28,10 @@ public class Game {
 
 		playerList=new ArrayList<Player>();
 
-		playerList.add(new Player(1));
-		playerList.add(new Player(2));
-		playerList.add(new Player(3));
-		playerList.add(new Player(4));
+		playerList.add(new Player(1, "Alain"));
+		playerList.add(new Player(2, "Michel"));
+		playerList.add(new Player(3, "Jacky"));
+		playerList.add(new Player(4, "Robert"));
 
 	}
 

@@ -42,7 +42,7 @@ public class GameView {
 		
 		mapViewList = new ArrayList<MapView>();
 		for (Map m : game.getMapList()) {
-			mapViewList.add(new MapView(m));
+			mapViewList.add(new MapView(m, game));
 		}
 		worldMap = new WorldMap(mapViewList);
 		generateWorldMap();
@@ -125,6 +125,7 @@ public class GameView {
 		}
 	}
 	private void generatePlayerBar() {
+		
 		PlayerView p1View = new PlayerView(game.getPlayerList().get(0), Color.RED);
 		PlayerView p2View = new PlayerView(game.getPlayerList().get(1), Color.BLUE);
 		PlayerView p3View = new PlayerView(game.getPlayerList().get(2), Color.GREEN);

@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import model.Game;
 import model.Node;
 import model.Tile;
 
@@ -13,6 +14,7 @@ import model.Tile;
 
 public class NodeView {
 	private Node node;
+	private Game game;
 	private int X;
 	private int Y;
 	private Circle circle;
@@ -21,7 +23,8 @@ public class NodeView {
 	private int scale;
 	
 	
-	NodeView(Node pnode, int pX, int pY) {
+	NodeView(Node pnode, int pX, int pY,Game g) {
+		game = g;
 		radius = 20;
 		scale = 2;
 		node = pnode;

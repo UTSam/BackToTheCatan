@@ -59,7 +59,7 @@ public class PlayerView {
 		nbEnergy.setFont(Font.font("Cambria", 20));
 		nbConstruction.setFont(Font.font("Cambria", 20));
 		
-		Label playerName = new Label("Joueur : " + Integer.toString(player.getId()));
+		Label playerName = new Label(player.getName());
 		playerName.setFont(Font.font("Cambria", 40));
 		
 		tradeButton = new Button("Echanger");

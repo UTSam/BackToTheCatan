@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import model.Game;
 import model.Map;
 import model.Node;
 import model.Road;
@@ -30,12 +31,14 @@ public class MapView {
 	private Group mapGroup;
 	private Button backButton;
 	private PlayerBar playerBar;
+	private Game game;
 
 
 
 
-	public MapView(Map pmap) {
+	public MapView(Map pmap, Game g) {
 		map = pmap;
+		game = g;
 		borderPane = new BorderPane();
 		mapGroup = new Group();
 		backButton = new Button("BACK");
@@ -61,7 +64,7 @@ public class MapView {
 		printTiles(mapGroup);
 		printRoads(mapGroup);
 		printNodes(mapGroup);
-
+		
 		borderPane.setCenter(mapGroup);
 		borderPane.setLeft(backButton);
 	}
@@ -77,7 +80,7 @@ public class MapView {
 		int deltaLengthX = length*86/100;
 		int deltaPosY = length/2;
 
-
+		
 		for (int i = 0; i < 8; i++){
 			for(int j = 0; j < 15; j++){
 
@@ -86,27 +89,31 @@ public class MapView {
 						tmpNodeView = new NodeView(
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
-								(tmpNode.getX()-1)*(length+deltaPosY)+deltaPosY);
+								(tmpNode.getX()-1)*(length+deltaPosY)+deltaPosY,
+								game);
 						//tmpNodeView.getCircle().setFill(Color.BLUE);
 					}
 					if ((i%2 == 0)&&(j%2 == 0)){
 						tmpNodeView = new NodeView(tmpNode,
 								tmpNode.getY()*deltaLengthX,
-								(tmpNode.getX()-1)*(length+deltaPosY));
+								(tmpNode.getX()-1)*(length+deltaPosY),
+								game);
 						//tmpNodeView.getCircle().setFill(Color.GREEN);
 					}
 					if ((i%2 == 1)&&(j%2 == 1)){
 						tmpNodeView = new NodeView(
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
-								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY-deltaPosY);
+								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY-deltaPosY,
+								game);
 						//tmpNodeView.getCircle().setFill(Color.RED);
 					}
 					if ((i%2 == 1)&&(j%2 == 0)){
 						tmpNodeView = new NodeView(
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
-								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY);
+								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY,
+								game);
 						//tmpNodeView.getCircle().setFill(Color.YELLOW);
 					}
 				nodeViewList.add(tmpNodeView);
@@ -122,7 +129,8 @@ public class MapView {
 			tmpRoadView = new RoadView(
 					tmpRoad,
 					NodeView.getNodeViewByNode(tmpRoad.getNode1(), nodeViewList),
-					NodeView.getNodeViewByNode(tmpRoad.getNode2(), nodeViewList));
+					NodeView.getNodeViewByNode(tmpRoad.getNode2(), nodeViewList),
+					game);
 			roadViewList.add(tmpRoadView);
 		}
 	}
@@ -130,12 +138,25 @@ public class MapView {
 	private void generateTileViewList(Map map) {
 
 		TileView tmpTileView;
-
-		for (Tile tmpTile : map.getTileList()) {
-			tmpTileView = new TileView(
-					tmpTile,
-					NodeView.getNodeViewListFromTile(tmpTile, nodeViewList));
-			tileViewList.add(tmpTileView);
+		if (map.getSize()==5) {
+			for (Tile tmpTile : map.getTileList()) {
+				tmpTileView = new TileView(
+						tmpTile,
+						NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
+						game);
+				tileViewList.add(tmpTileView);
+			} 
+		}
+		else if (map.getSize()==4) {
+			for (Tile tmpTile : map.getTileList()) {
+				if (tmpTile.getNodeList().get(0).getY()<11) {
+					tmpTileView = new TileView(
+							tmpTile,
+							NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
+							game);
+					tileViewList.add(tmpTileView);
+				}
+			}
 		}
 
 	}

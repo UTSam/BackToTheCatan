@@ -3,6 +3,7 @@ package view;
 import java.util.ArrayList;
 
 import javafx.event.EventHandler;
+import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
@@ -22,6 +23,8 @@ public class WorldMap {
 		mapViewList = pmapViewList;
 		gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
+		gridPane.setHgap(80);
+		gridPane.setVgap(10);
 		map1Group = new Group();
 		map2Group = new Group();
 		map3Group = new Group();
@@ -33,11 +36,16 @@ public class WorldMap {
 		printRoads();
 		printNodes();
 
-			
-		gridPane.add(map1Group, 0, 0);
-		gridPane.add(map2Group, 1, 0);
-		gridPane.add(map3Group, 0, 1);
-		gridPane.add(map4Group, 1, 1);  
+		GridPane.setHalignment(map1Group, HPos.RIGHT);
+		GridPane.setHalignment(map2Group, HPos.CENTER);
+		GridPane.setHalignment(map3Group, HPos.CENTER);
+		GridPane.setHalignment(map4Group, HPos.CENTER);
+		
+		gridPane.add(map1Group, 1, 0);
+		gridPane.add(map2Group, 2, 0);
+		gridPane.add(map3Group, 0, 1, 2, 1);
+		gridPane.add(map4Group, 2, 1, 2, 1);  
+
 		
 	}
 	

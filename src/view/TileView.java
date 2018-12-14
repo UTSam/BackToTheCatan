@@ -12,6 +12,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
+import model.Game;
 import model.Node;
 import model.ResourceType;
 import model.Road;
@@ -22,6 +23,7 @@ import model.Tile;
 public class TileView {
 	
 	private Tile tile;
+	private Game game;
 	private ArrayList<NodeView> nodeViewList;
 	private Group tileGroup;
 	private VBox vBox;
@@ -29,8 +31,9 @@ public class TileView {
 	private Polygon smallHexagon;
 	private int scale;
 	
-	TileView(Tile ptile, ArrayList<NodeView> pnodeViewList) {
+	TileView(Tile ptile, ArrayList<NodeView> pnodeViewList, Game g) {
 		tile = ptile;
+		game = g;
 		nodeViewList = pnodeViewList;
 		tileGroup = new Group();
 		scale = 2;
@@ -60,7 +63,7 @@ public class TileView {
 			
 			Label resourceLabel = new Label(tile.getResource().getType().toString());
 			vBox.getChildren().add(resourceLabel);
-			vBox.getChildren().add(new Label("6"));
+			vBox.getChildren().add(new Label(Integer.toString(tile.getNumber())));
 			
 			HBox resourceHBox = new HBox();
 			resourceHBox.setAlignment(Pos.CENTER);
@@ -68,22 +71,26 @@ public class TileView {
 			for (int i = 0; i < tile.getResource().getFood(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.GREENYELLOW);
+				c.setStroke(Color.BLACK);
 				resourceHBox.getChildren().add(c);
 			}
 			
 			for (int i = 0; i < tile.getResource().getConstruction(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.SADDLEBROWN);
+				c.setStroke(Color.BLACK);
 				resourceHBox.getChildren().add(c);
 			}
 			for (int i = 0; i < tile.getResource().getGold(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.GOLD);
+				c.setStroke(Color.BLACK);
 				resourceHBox.getChildren().add(c);
 			}
 			for (int i = 0; i < tile.getResource().getEnergy(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.CORNFLOWERBLUE);
+				c.setStroke(Color.BLACK);
 				resourceHBox.getChildren().add(c);
 			}
 			

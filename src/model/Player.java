@@ -3,14 +3,16 @@ package model;
 public class Player {
 	private static int score;
 	private int id;
+	private String name;
 	private ResourceInventory resourceInventory;
 	private static int[] cardInventory = new int[100];
 	private static boolean hasLongestRoad;
 	private static int nbCard;
 
-	public Player(int id) {
-		this.id = id;
 
+	public Player(int id, String name) {
+		this.id = id;
+		this.name = name;
 	}
 
 	public ResourceInventory getResourceInventory(){
@@ -32,6 +34,9 @@ public class Player {
 
 	public int getId() {
 		return id;
+	}
+	public String getName() {
+		return name;
 	}
 
 }
