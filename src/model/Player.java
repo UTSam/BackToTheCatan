@@ -13,6 +13,7 @@ public class Player {
 	public Player(int id, String name) {
 		this.id = id;
 		this.name = name;
+		score=0;
 	}
 
 	public ResourceInventory getResourceInventory(){
@@ -35,8 +36,13 @@ public class Player {
 	public int getId() {
 		return id;
 	}
+
 	public String getName() {
 		return name;
+	}
+
+	public int getScore() {
+		return score;
 	}
 
 }

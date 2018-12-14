@@ -9,6 +9,9 @@ public class Game {
 	private ArrayList<Resource> resourceList;
 	private ArrayList<Player> playerList;
 
+	private Player playerTurn;
+	private int scoreToWin;
+
 	public Game () {
 		mapList=new ArrayList<Map>();
 
@@ -33,13 +36,41 @@ public class Game {
 		playerList.add(new Player(3, "Jacky"));
 		playerList.add(new Player(4, "Robert"));
 
+		playerTurn=playerList.get(0);
+		scoreToWin=10;
+
 	}
 
 	public void Run(){
-		for (Map m : mapList) {
-			m.printRoad();
-			m.printTile();
+		/*boolean hasWin=false;
+		while(hasWin=false){
+			for(Player player: playerList){
+				if (player.getScore()>=scoreToWin){
+					hasWin=true;
+				}
+			}
+			attributeResources();
+				nextPlayer();
+			}
+		}*/
+	}
+
+	public Player whoWin(){
+		Player winner=null;
+		for(Player player: playerList){
+			if(player.getScore()==scoreToWin){
+				winner=player;
+			}
 		}
+		return winner;
+	}
+
+	public void nextPlayer(){
+		if(playerTurn.getId()<4){
+			playerTurn=playerList.get(playerTurn.getId());
+		}
+		else
+			playerTurn=playerList.get(0);
 	}
 
 	public int throwDice(){
@@ -96,7 +127,7 @@ public class Game {
 	public ArrayList<Map> getMapList(){
 		return mapList;
 	}
-	
+
 	public ArrayList<Player> getPlayerList(){
 		return playerList;
 	}
