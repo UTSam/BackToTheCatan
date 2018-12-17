@@ -8,37 +8,104 @@ public class Game {
 	private ArrayList<Map> mapList;
 	private ArrayList<Resource> resourceList;
 	private ArrayList<Player> playerList;
+	private ArrayList<Card> cardList;
 
 	private Player playerTurn;
 	private int scoreToWin;
 
 	public Game () {
+
+		generateResourceList();
+		generateMapList();
+		generatePlayerList();
+		generateCardList();
+
+		playerTurn=playerList.get(0);
+		scoreToWin=10;
+
+	}
+
+	private void generateMapList(){
 		mapList=new ArrayList<Map>();
 
 		mapList.add(new Map("1850",4,1,1,4,3,4,3,2));
 		mapList.add(new Map("1955",5,1,1,4,3,4,3,2));
 		mapList.add(new Map("1985",5,1,1,4,3,4,3,2));
 		mapList.add(new Map("2015",4,1,1,4,3,4,3,2));
+
+		//Generation of the maps
+		for (Map m : mapList) {
+			m.generate(resourceList);
+		}
+	}
+
+	private void generateResourceList(){
 		resourceList= new ArrayList<Resource>();
 
 		initializeResourceList();
+	}
 
-		//Generation of the map
-		for (Map m : mapList) {
-			//m.setToBigSize();
-			m.generate(resourceList);
-		}
-
+	private void generatePlayerList(){
 		playerList=new ArrayList<Player>();
 
 		playerList.add(new Player(1, "Alain"));
 		playerList.add(new Player(2, "Michel"));
 		playerList.add(new Player(3, "Jacky"));
 		playerList.add(new Player(4, "Robert"));
+	}
 
-		playerTurn=playerList.get(0);
-		scoreToWin=10;
+	private void generateCardList(){
+		cardList = new ArrayList<Card>();
 
+		/* cardValueList represent the number of time the card type i will be present*/
+		/* The card type order is VictoryPoint,Knight,Discovery, Monopole and RoadConstruction;*/
+		int cardValueList[], max=25, rand = 0, j=0;
+		cardValueList=new int[] {5,14,2,2,2};
+
+		int cardType;
+
+		while (j!=max){
+			/* Module that find a card type that is still not all in the card stack*/
+			rand=(int) (Math.random()*25)+1;
+			cardType=FindCardTypeFromStack(rand);
+			while(cardValueList[cardType]==0 && j<max){
+				rand=(int) (Math.random()*25)+1;
+				cardType=FindCardTypeFromStack(rand);
+			}
+
+			if(j<max){
+
+				cardValueList[cardType]--;
+
+				switch (cardType){
+				case 0:
+					cardList.add(new Card(CardType.VictoryPoint));
+					break;
+				case 1:
+					cardList.add(new Card(CardType.Knight));
+					break;
+				case 2:
+					cardList.add(new Card(CardType.Discovery));
+					break;
+				case 3:
+					cardList.add(new Card(CardType.Monopole));
+					break;
+				case 4:
+					cardList.add(new Card(CardType.RoadConstruction));
+					break;
+				}
+			}
+			j++;
+		}
+	}
+
+
+	public void printCardList(){
+		int i=1;
+		for(Card card:cardList){
+			System.out.println("Carte n" + i + " " + card.getCardType());
+			i++;
+		}
 	}
 
 	public void Run(){
@@ -54,6 +121,28 @@ public class Game {
 			}
 		}*/
 	}
+
+	private int FindCardTypeFromStack(int rand){
+		int cardType = 0;
+		if(rand<=5){
+			cardType=0;
+			}
+		else if(rand<=19){
+			cardType=1;
+		}
+		else if(rand<=21){
+			cardType=2;
+		}
+		else if(rand<=23){
+			cardType=3;
+		}
+		else if(rand<=25){
+			cardType=4;
+		}
+		return cardType;
+	}
+
+
 
 	public Player whoWin(){
 		Player winner=null;

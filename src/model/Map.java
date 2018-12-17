@@ -163,16 +163,15 @@ public class Map {
 		/* For example the number 1 is present 1 time and the number 6 is present 2 times */
 		int tileValueList[],max;
 		if (mapSize==5){
-			tileValueList=new int[] {1,2,2,2,2,2,2,2,2,2,1};
+			tileValueList=new int[] {1,2,2,2,2,0,2,2,2,2,1};
 			max=19;
 		}
 		else {
-			tileValueList=new int[] {1,1,1,1,2,2,1,1,1,1,1};
+			tileValueList=new int[] {1,1,1,1,2,0,2,2,1,1,1};
 			max=14;
 
 		}
 
-		int initialThiefPosition=(int) (Math.random()*max); /* The counter for the initial position of the thief */
 		int rand,rand2,i=0,j=0;
 		boolean isSeaTile;
 
@@ -183,7 +182,6 @@ public class Map {
 			for(Node node:tile.getNodeList()){
 				if(node.getStatus()==StatusNodeType.SEA) isSeaTile=true;
 			}
-
 			if (isSeaTile){
 				for(Resource resource: resourceList){
 					if(resource.getType()==ResourceType.SEA){
@@ -191,6 +189,7 @@ public class Map {
 					}
 				}
 			}
+
 			else {
 				rand=(int) (Math.random()*8);
 				while(tileRepartition[rand]==0 && j<max){
@@ -199,14 +198,13 @@ public class Map {
 				if(tileRepartition[rand]!=0){
 					tileRepartition[rand]--;
 					tile.setType(resourceList.get(rand));
+
+					/* Set the thief on the Mountain tile */
+					if (tile.getResource().getType()==ResourceType.MOUNTAIN)
+						tile.setThief(true);
+
 					j++;
 				}
-
-				if(initialThiefPosition==0) {
-					tile.setThief(true);
-					initialThiefPosition--;
-				}
-				else initialThiefPosition--;
 			}
 
 			/* Setting of the value of the tile */ 						/* TODO CHECK OPTIMISATION ET A TESTER SUR PETITE MAP*/
