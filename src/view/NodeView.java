@@ -14,7 +14,7 @@ import model.Tile;
 
 public class NodeView {
 	private Node node;
-	private Game game;
+	private GameView gameView;
 	private int X;
 	private int Y;
 	private Circle circle;
@@ -23,8 +23,8 @@ public class NodeView {
 	private int scale;
 	
 	
-	NodeView(Node pnode, int pX, int pY,Game g) {
-		game = g;
+	NodeView(Node pnode, int pX, int pY,GameView gv) {
+		gameView = gv;
 		radius = 20;
 		scale = 2;
 		node = pnode;

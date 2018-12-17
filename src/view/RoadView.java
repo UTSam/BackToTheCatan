@@ -13,7 +13,7 @@ public class RoadView {
 	private Road road;
 	private NodeView nodeView1;
 	private NodeView nodeView2;
-	private Game game;
+	private GameView gameView;
 	private Line line;
 	private Line underLine;
 	private Line smallLine;
@@ -22,9 +22,9 @@ public class RoadView {
 	
 	private int width;
 	
-	RoadView(Road proad, NodeView n1, NodeView n2, Game g) {
+	RoadView(Road proad, NodeView n1, NodeView n2, GameView gv) {
 		road = proad;
-		game = g;
+		gameView = gv;
 		nodeView1 = n1;
 		nodeView2 = n2;
 		width = 12;

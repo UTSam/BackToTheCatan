@@ -31,14 +31,14 @@ public class MapView {
 	private Group mapGroup;
 	private Button backButton;
 	private PlayerBar playerBar;
-	private Game game;
+	private GameView gameView;
 
 
 
 
-	public MapView(Map pmap, Game g) {
+	public MapView(Map pmap, GameView gv) {
 		map = pmap;
-		game = g;
+		gameView = gv;
 		borderPane = new BorderPane();
 		mapGroup = new Group();
 		backButton = new Button("BACK");
@@ -90,14 +90,14 @@ public class MapView {
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*(length+deltaPosY)+deltaPosY,
-								game);
+								gameView);
 						//tmpNodeView.getCircle().setFill(Color.BLUE);
 					}
 					if ((i%2 == 0)&&(j%2 == 0)){
 						tmpNodeView = new NodeView(tmpNode,
 								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*(length+deltaPosY),
-								game);
+								gameView);
 						//tmpNodeView.getCircle().setFill(Color.GREEN);
 					}
 					if ((i%2 == 1)&&(j%2 == 1)){
@@ -105,7 +105,7 @@ public class MapView {
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY-deltaPosY,
-								game);
+								gameView);
 						//tmpNodeView.getCircle().setFill(Color.RED);
 					}
 					if ((i%2 == 1)&&(j%2 == 0)){
@@ -113,7 +113,7 @@ public class MapView {
 								tmpNode,
 								tmpNode.getY()*deltaLengthX,
 								(tmpNode.getX()-1)*length+tmpNode.getX()*deltaPosY,
-								game);
+								gameView);
 						//tmpNodeView.getCircle().setFill(Color.YELLOW);
 					}
 				nodeViewList.add(tmpNodeView);
@@ -130,7 +130,7 @@ public class MapView {
 					tmpRoad,
 					NodeView.getNodeViewByNode(tmpRoad.getNode1(), nodeViewList),
 					NodeView.getNodeViewByNode(tmpRoad.getNode2(), nodeViewList),
-					game);
+					gameView);
 			roadViewList.add(tmpRoadView);
 		}
 	}
@@ -143,7 +143,7 @@ public class MapView {
 				tmpTileView = new TileView(
 						tmpTile,
 						NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
-						game);
+						gameView.getGame());
 				tileViewList.add(tmpTileView);
 			} 
 		}
@@ -153,7 +153,7 @@ public class MapView {
 					tmpTileView = new TileView(
 							tmpTile,
 							NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
-							game);
+							gameView.getGame());
 					tileViewList.add(tmpTileView);
 				}
 			}

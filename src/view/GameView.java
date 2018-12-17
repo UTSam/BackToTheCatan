@@ -48,7 +48,7 @@ public class GameView {
 		
 		mapViewList = new ArrayList<MapView>();
 		for (Map m : game.getMapList()) {
-			mapViewList.add(new MapView(m, game));
+			mapViewList.add(new MapView(m, this));
 		}
 		worldMap = new WorldMap(mapViewList);
 		generateWorldMap();
