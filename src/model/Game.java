@@ -79,19 +79,19 @@ public class Game {
 
 				switch (cardType){
 				case 0:
-					cardList.add(new Card(CardType.VictoryPoint));
+					cardList.add(new Card(CardType.VictoryPoint,this));
 					break;
 				case 1:
-					cardList.add(new Card(CardType.Knight));
+					cardList.add(new Card(CardType.Knight,this));
 					break;
 				case 2:
-					cardList.add(new Card(CardType.Discovery));
+					cardList.add(new Card(CardType.Discovery,this));
 					break;
 				case 3:
-					cardList.add(new Card(CardType.Monopole));
+					cardList.add(new Card(CardType.Monopole,this));
 					break;
 				case 4:
-					cardList.add(new Card(CardType.RoadConstruction));
+					cardList.add(new Card(CardType.RoadConstruction,this));
 					break;
 				}
 			}
