@@ -8,6 +8,7 @@ public class Player {
 	private static int[] cardInventory = new int[100];
 	private static boolean hasLongestRoad;
 	private static int nbCard;
+	private int knightPoint;
 
 
 	public Player(int id, String name) {
@@ -15,6 +16,7 @@ public class Player {
 		this.name = name;
 		resourceInventory = new ResourceInventory();
 		score=0;
+		knightPoint=0;
 	}
 
 	public ResourceInventory getResourceInventory(){
@@ -33,6 +35,14 @@ public class Player {
 		Player2.resourceInventory.removeResource(n1);
 
 	}*/
+
+	public void addVictoryPoint(){
+		score++;
+	}
+
+	public void addKnightPoint(){
+		knightPoint++;
+	}
 
 	public int getId() {
 		return id;
