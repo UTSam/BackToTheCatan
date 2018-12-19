@@ -45,5 +45,49 @@ public class Player {
 	public int getScore() {
 		return score;
 	}
+	
+	public StatusNodeType chooseNodeStatus() {
+		StatusNodeType s =StatusNodeType.EMPTY;
+		switch (this.id) {
+		case 1 : s=StatusNodeType.PLAYER1;
+		break;
+		case 2 : s=StatusNodeType.PLAYER2;
+		break;
+		case 3 : s=StatusNodeType.PLAYER3;
+		break;
+		case 4 : s=StatusNodeType.PLAYER4;
+		break;
+		}
+		return s;
+	}
+	
+	public StatusRoadType chooseRoadStatus() {
+		StatusRoadType s =StatusRoadType.EMPTY;
+		switch (this.id) {
+		case 1 : s=StatusRoadType.PLAYER1;
+		break;
+		case 2 : s=StatusRoadType.PLAYER2;
+		break;
+		case 3 : s=StatusRoadType.PLAYER3;
+		break;
+		case 4 : s=StatusRoadType.PLAYER4;
+		break;
+		}
+		return s;
+	}
+	public boolean CheckResource(int f, int e, int c, int g) {
+
+        if(resourceInventory.getFood() < f || resourceInventory.getEnergy() < e ||  resourceInventory.getConstruction() < c ||resourceInventory.getGold() < g  ) {
+            return false;
+        }
+        else {
+            return true;
+        }
+
+    }
+
+	public void setScore(int score) {
+		Player.score = score;
+	}
 
 }

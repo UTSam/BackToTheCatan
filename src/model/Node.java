@@ -7,6 +7,14 @@ public class Node {
 	private StatusNodeType status;
 	private boolean isTeleporter;
 
+	public boolean isTeleporter() {
+		return isTeleporter;
+	}
+
+	public void setTeleporter(boolean isTeleporter) {
+		this.isTeleporter = isTeleporter;
+	}
+
 	public Node(int x, int y,StatusNodeType status){
 		this.x = x;
 		this.y = y;
@@ -27,6 +35,17 @@ public class Node {
 
 	public int getX(){
 		return x;
+	}
+
+	public void setStatus(StatusNodeType status) {
+		this.status = status;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 	public int getY(){

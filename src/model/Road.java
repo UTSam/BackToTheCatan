@@ -39,4 +39,8 @@ public class Road {
 		return status;
 	}
 
+	public void setStatus(StatusRoadType status) {
+		this.status = status;
+	}
+
 }

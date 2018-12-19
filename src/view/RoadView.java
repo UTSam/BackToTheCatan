@@ -51,7 +51,26 @@ public class RoadView {
 		          " to "+
 		          nodeView2.getNode().getX()+ " " +
 		          nodeView2.getNode().getY());
+		            if (gameView.getActionBar().isRB())
+		            {
+
+		            	if (gameView.isMap1())
+		            	{ System.out.println("ca marche");
+		            		gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(0));
+		            	refreshColor();}
+		            	if (gameView.isMap2())
+		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(1));refreshColor();}
+		            	if (gameView.isMap3())
+		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(2));refreshColor();}
+		            	if (gameView.isMap4())
+		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(3));refreshColor();}
+		            	for (PlayerView pv : gameView.getPlayerViewList())
+	            		{
+	            		pv.refresh();
+	            		}
+		            }
 		          }
+		          
 		        });
 	}
 	
@@ -71,6 +90,8 @@ public class RoadView {
 		return smallLine;
 	}
 	
+	
+	
 	void refreshColor(){
 
 		switch (road.getStatus()) {
@@ -81,12 +102,29 @@ public class RoadView {
 			smallUnderLine.setStroke(Color.BLACK);
 			break;
 		case PLAYER1:
+			line.setStroke(Color.RED);
+			underLine.setStroke(Color.BLACK);
+			smallLine.setStroke(Color.RED);
+			smallUnderLine.setStroke(Color.BLACK);
+			
 			break;
 		case PLAYER2:
+			line.setStroke(Color.BLUE);
+			underLine.setStroke(Color.BLACK);
+			smallLine.setStroke(Color.BLUE);
+			smallUnderLine.setStroke(Color.BLACK);
 			break;
 		case PLAYER3:
+			line.setStroke(Color.GREEN);
+			underLine.setStroke(Color.BLACK);
+			smallLine.setStroke(Color.GREEN);
+			smallUnderLine.setStroke(Color.BLACK);
 			break;
 		case PLAYER4:
+			line.setStroke(Color.YELLOW);
+			underLine.setStroke(Color.BLACK);
+			smallLine.setStroke(Color.YELLOW);
+			smallUnderLine.setStroke(Color.BLACK);
 			break;
 		default:
 			break;

@@ -30,6 +30,12 @@ import model.Game;
 import model.Map;
 
 public class GameView {
+	private boolean isMap1;
+	private boolean isMap2;
+	private boolean isMap3;
+	private boolean isMap4;
+
+	
 	
 	private Game game;
 	
@@ -45,6 +51,10 @@ public class GameView {
 
 	public GameView(Game g){
 		game = g;
+		isMap1=false;
+		isMap2=false;
+		isMap3=false;
+		isMap4=false;
 		
 		mapViewList = new ArrayList<MapView>();
 		for (Map m : game.getMapList()) {
@@ -101,28 +111,28 @@ public class GameView {
 		worldMap.getMap1Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
-	        	  setMapView(mapViewList.get(0));
+	        	  setMapView(mapViewList.get(0));isMap1=true;
 	          }
 	        });
 		
 		worldMap.getMap2Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
-	        	  setMapView(mapViewList.get(1));
+	        	  setMapView(mapViewList.get(1));isMap2=true;
 	          }
 	        });
 		
 		worldMap.getMap3Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
-	        	  setMapView(mapViewList.get(2));
+	        	  setMapView(mapViewList.get(2));isMap3=true;
 	          }
 	        });
 		
 		worldMap.getMap4Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
-	        	  setMapView(mapViewList.get(3));
+	        	  setMapView(mapViewList.get(3));isMap4=true;
 	          }
 	        });
 		
@@ -131,6 +141,10 @@ public class GameView {
 			        new EventHandler<MouseEvent>() {
 		          public void handle(MouseEvent me) {
 		        	  setMapView(worldMap);
+		        	  isMap1=false;
+		        	  isMap2=false;
+		        	  isMap3=false;
+		        	  isMap4=false;
 		          }
 		        });
 		}
@@ -163,4 +177,53 @@ public class GameView {
 	public ArrayList<PlayerView> getPlayerViewList() {
 		return playerViewList;
 	}
+	
+	public boolean isMap1() {
+		return isMap1;
+	}
+
+
+	public void setMap1(boolean isMap1) {
+		this.isMap1 = isMap1;
+	}
+
+
+	public boolean isMap2() {
+		return isMap2;
+	}
+
+
+	public void setMap2(boolean isMap2) {
+		this.isMap2 = isMap2;
+	}
+
+
+	public ActionBar getActionBar() {
+		return actionBar;
+	}
+
+
+	public void setActionBar(ActionBar actionBar) {
+		this.actionBar = actionBar;
+	}
+
+
+	public boolean isMap3() {
+		return isMap3;
+	}
+
+
+	public void setMap3(boolean isMap3) {
+		this.isMap3 = isMap3;
+	}
+
+
+	public boolean isMap4() {
+		return isMap4;
+	}
+
+
+	public void setMap4(boolean isMap4) {
+		this.isMap4 = isMap4;
+		}
 }

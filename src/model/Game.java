@@ -239,6 +239,73 @@ public class Game {
 		resourceList.add(new Resource(ResourceType.MOUNTAIN,0,0,0,0));
 		resourceList.add(new Resource(ResourceType.SEA,0,0,0,0));
 	}
+	
+	public void buildDelorean(Node n, Player p,Map m) {
+		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n))
+		{
+			n.setStatus(p.chooseNodeStatus());
+			p.setScore(p.getScore()+1);
+			p.getResourceInventory().addEnergy(-1);
+			p.getResourceInventory().addGold(-1);
+			p.getResourceInventory().addConstruction(-1);
+			p.getResourceInventory().addFood(-1);
+
+		}
+
+
+	}
+
+	public int getScoreToWin() {
+		return scoreToWin;
+	}
+
+	public void setScoreToWin(int scoreToWin) {
+		this.scoreToWin = scoreToWin;
+	}
+
+	public void buildRoad(Road r, Player p, Map m) {
+		if (p.CheckResource(1, 1, 1, 1) && r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p))
+		{
+			r.setStatus(p.chooseRoadStatus());
+			p.setScore(p.getScore()+1);
+			p.getResourceInventory().addEnergy(-1);
+			p.getResourceInventory().addGold(-1);
+			p.getResourceInventory().addConstruction(-1);
+			p.getResourceInventory().addFood(-1);
+		}
+
+
+	}
+	
+	public void buildTeleporter(Node n, Player p)
+	{
+		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
+		{
+			n.setTeleporter(true);
+			p.setScore(p.getScore()+1);
+			p.getResourceInventory().addEnergy(-1);
+			p.getResourceInventory().addGold(-1);
+			p.getResourceInventory().addConstruction(-1);
+			p.getResourceInventory().addFood(-1);
+			
+		}
+	}
+	/*public void buildTeleporterFree(Node n1, Player p)
+	{
+		if (n1.getStatus()==StatusNodeType.EMPTY)
+			
+		{	n1.setStatus(p.chooseNodeStatus());
+			n1.setTeleporter(true);
+		
+		}
+	}*/
+	public Player getPlayerTurn() {
+		return playerTurn;
+	}
+
+	public void setPlayerTurn(Player playerTurn) {
+		this.playerTurn = playerTurn;
+	}
 
 
 

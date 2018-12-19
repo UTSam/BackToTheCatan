@@ -6,7 +6,9 @@ import javafx.scene.layout.VBox;
 import model.Game;
 
 public class ActionBar {
-	
+	private boolean isRB;
+	private boolean isDB;
+	private boolean isCB;
 	private GameView gameView;
 	private VBox actionVBox;
 	private Button buildRoadButton;
@@ -16,6 +18,9 @@ public class ActionBar {
 	
 	
 	public ActionBar(GameView gv) {
+		isRB=false;
+		isDB=false;	
+		isCB=false;
 		gameView = gv;
 		actionVBox = new VBox();
 		actionVBox.setSpacing(50);
@@ -31,9 +36,9 @@ public class ActionBar {
 		buildConverterButton.setPrefSize(250, 150);
 		nextTurnButton.setPrefSize(250, 150);
 		
-		buildRoadButton.setOnAction( e -> System.out.println("road"));
-		buildDeloreanButton.setOnAction( e -> System.out.println("delorean"));
-		buildConverterButton.setOnAction( e -> System.out.println("converter"));
+		buildRoadButton.setOnAction( e -> { isRB=true; isDB=false;isCB=false;});
+		buildDeloreanButton.setOnAction( e -> { isRB=false; isDB=true;isCB=false;});
+		buildConverterButton.setOnAction( e -> { isRB=false; isDB=false;isCB=true;});
 		nextTurnButton.setOnAction( e -> {
 			gameView.getGame().nextPlayer();
 			for (PlayerView pv : gameView.getPlayerViewList()) {
@@ -44,6 +49,30 @@ public class ActionBar {
 		actionVBox.getChildren().addAll(buildRoadButton, buildDeloreanButton, buildConverterButton, nextTurnButton);
 	}
 	
+	public boolean isRB() {
+		return isRB;
+	}
+
+	public void setRB(boolean isRB) {
+		this.isRB = isRB;
+	}
+
+	public boolean isDB() {
+		return isDB;
+	}
+
+	public void setDB(boolean isDB) {
+		this.isDB = isDB;
+	}
+
+	public boolean isCB() {
+		return isCB;
+	}
+
+	public void setCB(boolean isCB) {
+		this.isCB = isCB;
+	}
+
 	public VBox getActionVBox() {
 		return actionVBox;
 	}

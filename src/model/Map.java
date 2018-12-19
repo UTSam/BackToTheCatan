@@ -276,6 +276,66 @@ public class Map {
 			System.out.println();
 		}
 	}
+	
+	public boolean checkNeighbour(Node n)
+	{
+		for (Road r : this.roadList)
+		{
+			if (r.getNode1()==n && r.getNode2().getStatus()!=StatusNodeType.EMPTY)
+			{
+					return true;
+			}
+			else if (r.getNode2()==n && r.getNode1().getStatus()!=StatusNodeType.EMPTY)
+			{
+					return true;
+			}
+		}
+		return false;
+	}
+
+
+	public boolean checkNeighbourR(Road r,Player p)
+	{
+		if (r.getNode1().getStatus()==p.chooseNodeStatus() || r.getNode2().getStatus()==p.chooseNodeStatus())
+		{
+			return true;
+		}
+
+		for (Road ro : this.roadList)
+
+		{
+			if ((ro.getNode1()==r.getNode1() || ro.getNode2()==r.getNode1()) && ro != r)
+			{
+				if (ro.getStatus()==p.chooseRoadStatus())
+				{
+					return true;
+				}
+
+			}
+
+			else if ((ro.getNode1()==r.getNode2() || ro.getNode2()==r.getNode2()) && ro != r)
+			{
+				if (ro.getStatus()==p.chooseRoadStatus())
+				{
+					return true;
+				}
+
+			}
+
+		}
+		return false;
+	}	
+
+	public Node[][] getNodeList() {
+		return nodeList;
+	}
+	public Node getNodeListElem(int i,int j) {
+		return nodeList[i][j];
+	}
+
+	public void setNodeList(Node[][] nodeList) {
+		this.nodeList = nodeList;
+	}
 
 }
 

@@ -7,10 +7,10 @@ public class ResourceInventory {
 	private int construction;
 
 	public ResourceInventory() {
-		this.food = 0;
-		this.gold = 0;
-		this.energy = 0;
-		this.construction = 0;
+		this.food = 2;
+		this.gold = 2;
+		this.energy = 2;
+		this.construction = 2;
 	}
 	
 	

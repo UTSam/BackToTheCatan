@@ -40,6 +40,63 @@ public class NodeView {
 		            System.out.println("Click on Node " + 
 		          node.getX()+ " " +
 		          node.getY());
+		            if (gameView.getActionBar().isDB())
+		            {
+		            	
+		            	
+
+		            	if (gameView.isMap1())
+		            	{
+		            		
+			            	
+		            		gameView.getGame().buildDelorean(node, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(0));refreshColor();
+		            		
+		            	}
+		            	if (gameView.isMap2())
+		            	{
+		            		
+		            		gameView.getGame().buildDelorean(node, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(1));refreshColor();
+		            	}
+		            	if (gameView.isMap3())
+		            		
+		            	{
+		            	
+		            		gameView.getGame().buildDelorean(node, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(2));refreshColor();
+		            	}
+		            	if (gameView.isMap4())
+		            	
+		            	{
+		            		gameView.getGame().buildDelorean(node, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(3));refreshColor();
+		            	}
+		            	
+		            }
+
+		            if (gameView.getActionBar().isCB())
+		            {
+
+		            	if (gameView.isMap1())
+		            	{
+		            		gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn());refreshColor();
+		            	}
+		            	if (gameView.isMap2())
+		            	{
+		            		gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn());refreshColor();
+		            	}
+		            	if (gameView.isMap3())
+		            	{
+		            		gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn());refreshColor();
+		            	}
+		            	if (gameView.isMap4())
+		            	{
+		            		gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn());refreshColor();
+		            	}
+		            	
+		            	
+		            }
+		        	for (PlayerView pv : gameView.getPlayerViewList())
+            		{
+            		pv.refresh();
+            		}
 		          }
 		        });
 	}
@@ -73,12 +130,29 @@ public class NodeView {
 			smallCircle.setStroke(Color.BLACK);
 				break;
 			case PLAYER1:
+				circle.setFill(Color.RED);
+				circle.setStroke(Color.BLACK);
+				smallCircle.setFill(Color.RED);
+				smallCircle.setStroke(Color.BLACK);
+				
 				break;
 			case PLAYER2:
+				circle.setFill(Color.BLUE);
+				circle.setStroke(Color.BLACK);
+				smallCircle.setFill(Color.BLUE);
+				smallCircle.setStroke(Color.BLACK);
 				break;
 			case PLAYER3:
+				circle.setFill(Color.GREEN);
+				circle.setStroke(Color.BLACK);
+				smallCircle.setFill(Color.GREEN);
+				smallCircle.setStroke(Color.BLACK);
 				break;
 			case PLAYER4:
+				circle.setFill(Color.YELLOW);
+				circle.setStroke(Color.BLACK);
+				smallCircle.setFill(Color.YELLOW);
+				smallCircle.setStroke(Color.BLACK);
 				break;
 			case SEA:
 			circle.setFill(Color.TRANSPARENT);
@@ -87,6 +161,11 @@ public class NodeView {
 			default:
 				break;
 		}
+		if (node.isTeleporter())
+		{
+			
+			circle.setStrokeWidth(10);
+			smallCircle.setStrokeWidth(5);}
 			
 	}
 	static NodeView getNodeViewByNode(Node pnode, ArrayList<NodeView> arrayList){
