@@ -99,5 +99,10 @@ public class Player {
 	public void setScore(int score) {
 		Player.score = score;
 	}
-
+	
+	public void setName(String n){
+		if (n.trim().length() > 0 && n != null && !n.isEmpty()) {
+			name = n;
+		}
+	}
 }

@@ -41,6 +41,7 @@ public class ActionBar {
 		buildConverterButton.setOnAction( e -> { isRB=false; isDB=false;isCB=true;});
 		nextTurnButton.setOnAction( e -> {
 			gameView.getGame().nextPlayer();
+			gameView.getGame().attributeResources();
 			for (PlayerView pv : gameView.getPlayerViewList()) {
 				pv.refresh();
 			}

@@ -19,11 +19,10 @@ import javafx.stage.Stage;
 import model.Game;
 import model.Map;
 import view.GameView;
+import view.MainMenu;
 
 public class Main  extends Application{
 
-	Stage mainMenu;
-	Button startButton;
 
     public static void main(String[] args) {
 		launch(args);
@@ -42,19 +41,6 @@ public class Main  extends Application{
 		//Displaying the board
 		//GameView gameView = new GameView(game.getMapList());
 		GameView gameView = new GameView(game);
-		mainMenu = primaryStage;
-		mainMenu.setTitle("MainMenu");
-
-		startButton = new Button("START");
-		startButton.setOnAction( e -> gameView.generate());
-		VBox layout = new VBox(10);
-		layout.getChildren().addAll(startButton);
-		layout.setAlignment(Pos.CENTER);
-
-		Scene scene = new Scene(layout, 600, 300);
-		mainMenu.setScene(scene);
-		mainMenu.show();
-
-
+		MainMenu mainMenu = new MainMenu(primaryStage, gameView);
 	}
 }

@@ -48,10 +48,10 @@ public class Game {
 	private void generatePlayerList(){
 		playerList=new ArrayList<Player>();
 
-		playerList.add(new Player(1, "Alain"));
-		playerList.add(new Player(2, "Michel"));
-		playerList.add(new Player(3, "Jacky"));
-		playerList.add(new Player(4, "Robert"));
+		playerList.add(new Player(1, "Joueur 1"));
+		playerList.add(new Player(2, "Joueur 2"));
+		playerList.add(new Player(3, "Joueur 3"));
+		playerList.add(new Player(4, "Joueur 4"));
 	}
 
 	private void generateCardList(){
@@ -171,6 +171,7 @@ public class Game {
 
 		int dice=throwDice();
 
+		System.out.println("de" + dice);	
 		/* Return the tiles with the corresponding number on the 4 maps*/
 		ArrayList<Tile> tileList=new ArrayList<Tile>();
 		for(Map m:mapList){
@@ -206,6 +207,7 @@ public class Game {
 					player.getResourceInventory().addEnergy(tile.getResource().getEnergy());
 					player.getResourceInventory().addFood(tile.getResource().getFood());
 					player.getResourceInventory().addGold(tile.getResource().getGold());
+					player=null;
 				}
 			}
 		}
