@@ -23,7 +23,7 @@ public class MainMenu {
 		stage.setTitle("MainMenu");
 		
 		Label title = new Label("Back To The Catan");
-		title.setFont(Font.font ("Verdana", 40));
+		title.setStyle( "-fx-font-size: 50;");
 		
 		TextField name1 = new TextField();
 		name1.setPrefColumnCount(15);
@@ -44,6 +44,7 @@ public class MainMenu {
 		
 		
 		Button startButton = new Button("JOUER");
+		startButton.setStyle( "-fx-font-size: 40;");
 		startButton.setOnAction( e -> {
 			ArrayList<Player> tmpList = new ArrayList<Player>();
 			tmpList = gameView.getGame().getPlayerList();
@@ -60,6 +61,7 @@ public class MainMenu {
 		layout.setAlignment(Pos.CENTER);
 
 		Scene scene = new Scene(layout, 500, 500);
+		scene.getStylesheets().add("resources/style.css");
 		stage.setScene(scene);
 		stage.show();
 	}

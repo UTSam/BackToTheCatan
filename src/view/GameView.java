@@ -48,8 +48,12 @@ public class GameView {
 	private BorderPane borderPane;
 	private Stage gameWindow;
 	private Scene scene;
+	
+	public IconManager iManager;
 
 	public GameView(Game g){
+		
+		iManager = new IconManager();
 		game = g;
 		isMap1=false;
 		isMap2=false;
@@ -65,11 +69,6 @@ public class GameView {
 		
 		playerViewList = new ArrayList<PlayerView>();
 		borderPane = new BorderPane();
-		/*BackgroundSize bSize = new BackgroundSize(BackgroundSize.AUTO, BackgroundSize.AUTO, false, false, true, false);
-		BackgroundImage bi = new BackgroundImage(new Image("file:BackToTheCatan/ressources/blue_background.jpg"),
-		        BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER,
-		          bSize);
-		borderPane.setBackground(new Background(bi));*/
 		gameWindow = new Stage();
 		gameWindow.setTitle("gameWindow");
 		scene = new Scene(borderPane, 2000, 1000);
@@ -79,6 +78,7 @@ public class GameView {
 	
 
 	public void generate() {
+		scene.getStylesheets().add("resources/style.css");
 		
 		for (MapView mv : mapViewList) {
 			mv.generate();
@@ -92,7 +92,6 @@ public class GameView {
 		
 		gameWindow.show();
 		gameWindow.setMaximized(true);
-		//boardWindow.setFullScreen(true);
 	}
 	
 		

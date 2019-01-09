@@ -9,6 +9,8 @@ public class Game {
 	private ArrayList<Resource> resourceList;
 	private ArrayList<Player> playerList;
 	private ArrayList<Card> cardList;
+	
+	private PairOfDice pairOfDice;
 
 	private Player playerTurn;
 	private int scoreToWin;
@@ -19,6 +21,8 @@ public class Game {
 		generateMapList();
 		generatePlayerList();
 		generateCardList();
+		
+		pairOfDice=new PairOfDice();
 
 		playerTurn=playerList.get(0);
 		scoreToWin=10;
@@ -98,6 +102,12 @@ public class Game {
 			j++;
 		}
 	}
+	
+	public void drawCard(Player player){
+		player.addCard(cardList.get(0));
+		cardList.remove(0);
+	}
+	
 
 
 	public void printCardList(){
@@ -160,6 +170,8 @@ public class Game {
 		}
 		else
 			playerTurn=playerList.get(0);
+		
+		attributeResources(); //TEST
 	}
 
 	public int throwDice(){
@@ -169,13 +181,13 @@ public class Game {
 	/* TODO A CHECK */
 	public void attributeResources(){
 
-		int dice=throwDice();
+		pairOfDice.roll();
 
-		System.out.println("de" + dice);	
+		System.out.println("de" + pairOfDice.getSum());	
 		/* Return the tiles with the corresponding number on the 4 maps*/
 		ArrayList<Tile> tileList=new ArrayList<Tile>();
 		for(Map m:mapList){
-			tileList.addAll(m.getTilesFromNumber(dice));
+			tileList.addAll(m.getTilesFromNumber(pairOfDice.getSum()));
 		}
 
 		/* Check if a player is in possession of the corresponding node */

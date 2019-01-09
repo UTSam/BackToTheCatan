@@ -1,11 +1,14 @@
 package model;
 
+import java.awt.CardLayout;
+import java.util.ArrayList;
+
 public class Player {
 	private static int score;
 	private int id;
 	private String name;
 	private ResourceInventory resourceInventory;
-	private static int[] cardInventory = new int[100];
+	private static ArrayList<Card> cardInventory = new ArrayList<Card>();
 	private static boolean hasLongestRoad;
 	private static int nbCard;
 	private int knightPoint;
@@ -38,6 +41,10 @@ public class Player {
 
 	public void addVictoryPoint(){
 		score++;
+	}
+	
+	public void addCard(Card card){
+		cardInventory.add(card);
 	}
 
 	public void addKnightPoint(){

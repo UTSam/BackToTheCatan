@@ -6,6 +6,8 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -23,17 +25,20 @@ import model.Tile;
 public class TileView {
 	
 	private Tile tile;
-	private Game game;
+	private GameView gameView;
 	private ArrayList<NodeView> nodeViewList;
+	
+	private Label resourceLabel;
+	private Label numberLabel;
 	private Group tileGroup;
 	private VBox vBox;
 	private Polygon hexagon;
 	private Polygon smallHexagon;
 	private int scale;
 	
-	TileView(Tile ptile, ArrayList<NodeView> pnodeViewList, Game g) {
+	TileView(Tile ptile, ArrayList<NodeView> pnodeViewList, GameView gv) {
 		tile = ptile;
-		game = g;
+		gameView = gv;
 		nodeViewList = pnodeViewList;
 		tileGroup = new Group();
 		scale = 2;
@@ -61,37 +66,57 @@ public class TileView {
 			vBox.setPrefWidth(nodeViewList.get(2).getX()-nodeViewList.get(0).getX());
 			vBox.setAlignment(Pos.CENTER);
 			
-			Label resourceLabel = new Label(tile.getResource().getType().toString());
+			resourceLabel = new Label(tile.getResource().getType().toString());
+			resourceLabel.setStyle("-fx-font-size: 15;"
+					+ "-fx-font-weight: bold;" 
+					+ "-fx-text-fill: black;");
 			vBox.getChildren().add(resourceLabel);
-			vBox.getChildren().add(new Label(Integer.toString(tile.getNumber())));
+			
+			numberLabel = new Label(Integer.toString(tile.getNumber()));
+			numberLabel.setStyle( "-fx-font-size: 30;" 
+					+ "-fx-text-fill: black;");
+			vBox.getChildren().add(numberLabel);
 			
 			HBox resourceHBox = new HBox();
 			resourceHBox.setAlignment(Pos.CENTER);
 			Circle c;
+			
 			for (int i = 0; i < tile.getResource().getFood(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.GREENYELLOW);
 				c.setStroke(Color.BLACK);
-				resourceHBox.getChildren().add(c);
+				ImageView tmp = new ImageView(gameView.iManager.getFoodIcon());
+				tmp.setFitHeight(30);
+				tmp.setFitWidth(30);
+				resourceHBox.getChildren().add(tmp);
 			}
 			
 			for (int i = 0; i < tile.getResource().getConstruction(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.SADDLEBROWN);
 				c.setStroke(Color.BLACK);
-				resourceHBox.getChildren().add(c);
+				ImageView tmp = new ImageView(gameView.iManager.getConstructionIcon());
+				tmp.setFitHeight(30);
+				tmp.setFitWidth(30);
+				resourceHBox.getChildren().add(tmp);
 			}
 			for (int i = 0; i < tile.getResource().getGold(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.GOLD);
 				c.setStroke(Color.BLACK);
-				resourceHBox.getChildren().add(c);
+				ImageView tmp = new ImageView(gameView.iManager.getGoldIcon());
+				tmp.setFitHeight(30);
+				tmp.setFitWidth(30);
+				resourceHBox.getChildren().add(tmp);
 			}
 			for (int i = 0; i < tile.getResource().getEnergy(); i++) {
 				c = new Circle(10);
 				c.setFill(Color.CORNFLOWERBLUE);
 				c.setStroke(Color.BLACK);
-				resourceHBox.getChildren().add(c);
+				ImageView tmp = new ImageView(gameView.iManager.getEnergyIcon());
+				tmp.setFitHeight(30);
+				tmp.setFitWidth(30);
+				resourceHBox.getChildren().add(tmp);
 			}
 			
 			vBox.getChildren().add(resourceHBox);
@@ -123,6 +148,12 @@ public class TileView {
 
 		switch (tile.getResource().getType()) {
 		case COAL:
+			resourceLabel.setStyle("-fx-font-size: 15;"
+					+ "-fx-font-weight: bold;" 
+					+ "-fx-text-fill: white;");
+			numberLabel.setStyle( "-fx-font-size: 30;" 
+					+ "-fx-text-fill: white;");
+			
 			hexagon.setFill(Color.BLACK);
 			smallHexagon.setFill(Color.BLACK);
 			break;
@@ -151,8 +182,8 @@ public class TileView {
 			smallHexagon.setFill(Color.LIMEGREEN);
 			break;
 		case SEA: 
-			hexagon.setFill(Color.LIGHTSKYBLUE);
-			smallHexagon.setFill(Color.LIGHTSKYBLUE);
+			hexagon.setFill(Color.TRANSPARENT);
+			smallHexagon.setFill(Color.TRANSPARENT);
 			break;
 		case WOOD: 
 			hexagon.setFill(Color.SADDLEBROWN);

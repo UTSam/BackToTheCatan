@@ -41,10 +41,11 @@ public class MapView {
 		gameView = gv;
 		borderPane = new BorderPane();
 		mapGroup = new Group();
-		backButton = new Button("BACK");
+		backButton = new Button("RETOUR");
 		backButton.setPrefSize(200, 100);
 		backButton.setLayoutX(50);
 		backButton.setLayoutY(100);
+		backButton.setStyle( "-fx-font-size: 20;");
 
 		tileViewList = new ArrayList<TileView>();
 		nodeViewList = new ArrayList<NodeView>();
@@ -143,7 +144,7 @@ public class MapView {
 				tmpTileView = new TileView(
 						tmpTile,
 						NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
-						gameView.getGame());
+						gameView);
 				tileViewList.add(tmpTileView);
 			} 
 		}
@@ -153,7 +154,7 @@ public class MapView {
 					tmpTileView = new TileView(
 							tmpTile,
 							NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
-							gameView.getGame());
+							gameView);
 					tileViewList.add(tmpTileView);
 				}
 			}

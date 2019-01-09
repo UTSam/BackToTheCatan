@@ -7,7 +7,9 @@ import javafx.geometry.HPos;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 
@@ -35,12 +37,27 @@ public class WorldMap {
 		printTiles();
 		printRoads();
 		printNodes();
+		
+		Label date1 = new Label("1850");
+		Label date2 = new Label("1955");
+		Label date3 = new Label("1985");
+		Label date4 = new Label("2015");
+		
+		date1.setStyle( "-fx-font-size: 50; -fx-text-fill: 	#FFFAF0	;");
+		date2.setStyle( "-fx-font-size: 50; -fx-text-fill: 	#FFFAF0	;");
+		date3.setStyle( "-fx-font-size: 50; -fx-text-fill: 	#FFFAF0	;");
+		date4.setStyle( "-fx-font-size: 50; -fx-text-fill: 	#FFFAF0	;");
+		
+		map1Group.getChildren().addAll(date1);
+		map2Group.getChildren().addAll(date2);
+		map3Group.getChildren().addAll(date3);
+		map4Group.getChildren().addAll(date4);
 
 		GridPane.setHalignment(map1Group, HPos.RIGHT);
 		GridPane.setHalignment(map2Group, HPos.CENTER);
 		GridPane.setHalignment(map3Group, HPos.CENTER);
 		GridPane.setHalignment(map4Group, HPos.CENTER);
-		
+	    
 		gridPane.add(map1Group, 1, 0);
 		gridPane.add(map2Group, 2, 0);
 		gridPane.add(map3Group, 0, 1, 2, 1);

@@ -36,6 +36,11 @@ public class ActionBar {
 		buildConverterButton.setPrefSize(250, 150);
 		nextTurnButton.setPrefSize(250, 150);
 		
+		buildRoadButton.setStyle( "-fx-font-size: 20;");
+		buildDeloreanButton.setStyle( "-fx-font-size: 20;");
+		buildConverterButton.setStyle( "-fx-font-size: 20;");
+		nextTurnButton.setStyle( "-fx-font-size: 20;");
+		
 		buildRoadButton.setOnAction( e -> { isRB=true; isDB=false;isCB=false;});
 		buildDeloreanButton.setOnAction( e -> { isRB=false; isDB=true;isCB=false;});
 		buildConverterButton.setOnAction( e -> { isRB=false; isDB=false;isCB=true;});

@@ -8,6 +8,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
@@ -27,7 +28,7 @@ public class TradeBox {
 	static int nbEnergy2=0;
 	static int nbConstruction2=0;
 	
-	public static void display(Player p1, Player p2, ArrayList<PlayerView> pvList) {
+	public static void display(Player p1, Player p2, GameView gv) {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setWidth(600);
@@ -74,27 +75,17 @@ public class TradeBox {
 			p2.getResourceInventory().addGold(-nbGold2);
 			p2.getResourceInventory().addConstruction(-nbConstruction2);
 			
-			for (PlayerView pv : pvList) {
+			for (PlayerView pv : gv.getPlayerViewList()) {
 				pv.refresh();
 			}
 			window.close();
 		});
 		
 		Label p1Name = new Label(p1.getName());
-		p1Name.setFont(Font.font("Cambria", 20));
+		p1Name.setStyle("-fx-font-size: 30;");
 		Label p2Name = new Label(p2.getName());
-		p2Name.setFont(Font.font("Cambria", 20));
-		
-		Circle foodCircle = new Circle(15);
-		Circle goldCircle = new Circle(15);
-		Circle energyCircle = new Circle(15);
-		Circle constructionCircle = new Circle(15);
-		
-		
-		foodCircle.setFill(Color.GREENYELLOW);
-		goldCircle.setFill(Color.GOLD);
-		energyCircle.setFill(Color.CORNFLOWERBLUE);
-		constructionCircle.setFill(Color.SADDLEBROWN);
+		p2Name.setStyle("-fx-font-size: 30;");
+
 		
 		Button addFood1 = new Button("+");
 		GridPane.setHalignment(addFood1, HPos.CENTER);
@@ -173,18 +164,6 @@ public class TradeBox {
 		GridPane.setHalignment(nbConstruction2L, HPos.CENTER);
 		
 		
-
-		
-		Circle foodCircle2 = new Circle(15);
-		Circle goldCircle2 = new Circle(15);
-		Circle energyCircle2 = new Circle(15);
-		Circle constructionCircle2 = new Circle(15);
-		
-		
-		foodCircle2.setFill(Color.GREENYELLOW);
-		goldCircle2.setFill(Color.GOLD);
-		energyCircle2.setFill(Color.CORNFLOWERBLUE);
-		constructionCircle2.setFill(Color.SADDLEBROWN);
 		
 		Button addFood2 = new Button("+");
 		GridPane.setHalignment(addFood2, HPos.CENTER);
@@ -254,10 +233,46 @@ public class TradeBox {
 		//grid 10*6
 		gridPane.add(p1Name, 0, 0,3, 1);
 
-		gridPane.add(foodCircle, 0, 1);
-		gridPane.add(goldCircle, 1, 1);
-		gridPane.add(energyCircle, 2, 1);
-		gridPane.add(constructionCircle, 3, 1);
+		int size = 30;
+		ImageView foodView1 = new ImageView(gv.iManager.getFoodIcon());
+		foodView1.setFitWidth(size);
+		foodView1.setFitHeight(size);
+		gridPane.add(foodView1, 0, 1);
+		
+		ImageView goldView1 = new ImageView(gv.iManager.getGoldIcon());
+		goldView1.setFitWidth(size);
+		goldView1.setFitHeight(size);
+		gridPane.add(goldView1, 1, 1);
+		
+		ImageView energyView1 = new ImageView(gv.iManager.getEnergyIcon());
+		energyView1.setFitWidth(size);
+		energyView1.setFitHeight(size);
+		gridPane.add(energyView1, 2, 1);
+		
+		ImageView constructionView1 = new ImageView(gv.iManager.getConstructionIcon());
+		constructionView1.setFitWidth(size);
+		constructionView1.setFitHeight(size);
+		gridPane.add(constructionView1, 4, 1);
+
+		ImageView foodView2 = new ImageView(gv.iManager.getFoodIcon());
+		foodView2.setFitWidth(size);
+		foodView2.setFitHeight(size);
+		gridPane.add(foodView2, 5, 1);
+		
+		ImageView goldView2 = new ImageView(gv.iManager.getGoldIcon());
+		goldView2.setFitWidth(size);
+		goldView2.setFitHeight(size);
+		gridPane.add(goldView2, 6, 1);
+		
+		ImageView energyView2 = new ImageView(gv.iManager.getEnergyIcon());
+		energyView2.setFitWidth(size);
+		energyView2.setFitHeight(size);
+		gridPane.add(energyView2, 7, 1);
+		
+		ImageView constructionView2 = new ImageView(gv.iManager.getConstructionIcon());
+		constructionView2.setFitWidth(size);
+		constructionView2.setFitHeight(size);
+		gridPane.add(constructionView2, 8, 1);
 		
 		gridPane.add(addFood1, 0, 3);
 		gridPane.add(addGold1, 1, 3);
@@ -277,11 +292,6 @@ public class TradeBox {
 		
 		gridPane.add(p2Name, 5, 0,3, 1);
 		
-		gridPane.add(foodCircle2, 5, 1);
-		gridPane.add(goldCircle2, 6, 1);
-		gridPane.add(energyCircle2, 7, 1);
-		gridPane.add(constructionCircle2, 8, 1);
-		
 		gridPane.add(addFood2, 5, 3);
 		gridPane.add(addGold2, 6, 3);
 		gridPane.add(addEnergy2, 7, 3);
@@ -297,10 +307,11 @@ public class TradeBox {
 		gridPane.add(removeEnergy2, 7, 5);
 		gridPane.add(removeConstruction2, 8, 5);
 		
-		gridPane.add(closeButton, 7, 12, 4, 3);
-		gridPane.add(validateButton, 2, 12, 4, 3);
+		gridPane.add(closeButton, 6, 12, 4, 3);
+		gridPane.add(validateButton, 1, 12, 4, 3);
 		
 		Scene scene = new Scene(gridPane);
+		scene.getStylesheets().add("resources/style.css");
 		window.setScene(scene);
 		window.showAndWait();
 	}

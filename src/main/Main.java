@@ -16,8 +16,11 @@ import javafx.scene.shape.Circle;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
+import model.Card;
+import model.CardType;
 import model.Game;
 import model.Map;
+import view.CardBox;
 import view.GameView;
 import view.MainMenu;
 
@@ -41,6 +44,8 @@ public class Main  extends Application{
 		//Displaying the board
 		//GameView gameView = new GameView(game.getMapList());
 		GameView gameView = new GameView(game);
+		
 		MainMenu mainMenu = new MainMenu(primaryStage, gameView);
+		//cardBox.display(game.getPlayerList().get(0));
 	}
 }
