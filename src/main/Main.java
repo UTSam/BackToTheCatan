@@ -46,6 +46,5 @@ public class Main  extends Application{
 		GameView gameView = new GameView(game);
 		
 		MainMenu mainMenu = new MainMenu(primaryStage, gameView);
-		//cardBox.display(game.getPlayerList().get(0));
 	}
 }

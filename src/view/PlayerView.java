@@ -26,6 +26,7 @@ public class PlayerView {
 	private GridPane gridPane;
 	private Color color;
 	
+	private Label nbVictoryPoint;
 	private Label nbFood;
 	private Label nbGold;
 	private Label nbEnergy;
@@ -34,6 +35,7 @@ public class PlayerView {
 	private Border largeBorder;
 	
 	private Button tradeButton;
+	private Button cardButton;
 	
 	public PlayerView(Player p, Color c, GameView gv) {
 		gameView = gv;
@@ -47,6 +49,8 @@ public class PlayerView {
 		gridPane.setVgap(5);
 		gridPane.setBorder(smallBorder);
 		
+		nbVictoryPoint = new Label();
+		nbVictoryPoint.setStyle("-fx-font-size: 20; -fx-text-fill: #000000	;");
 		
 		nbFood = new Label();
 		nbGold = new Label();
@@ -58,17 +62,26 @@ public class PlayerView {
 		nbConstruction.setStyle( "-fx-font-size: 20; -fx-text-fill: #000000	;");
 		
 		Label playerName = new Label(player.getName());
-		playerName.setStyle( "-fx-font-size: 40; -fx-text-fill: #000000	;");
+		playerName.setStyle( "-fx-font-size: 30; -fx-text-fill: #000000	;");
 		
 		tradeButton = new Button("Echanger");
 		tradeButton.setPrefSize(80, 30);
 		tradeButton.setStyle( "-fx-font-size: 13;");
 		tradeButton.setOnAction(e -> TradeBox.display(gameView.getGame().getCurrentPlayer(), player, gameView));
 		
+		cardButton = new Button("Voir cartes");
+		cardButton.setPrefSize(80, 30);
+		cardButton.setStyle( "-fx-font-size: 13;");
+		cardButton.setOnAction(e->{
+			CardBox cardBox = new CardBox(player, gameView);
+			cardBox.display();
+		});
+		
 		gridPane.setPadding(new Insets(10, 10, 10, 10));
 		gridPane.setHgap(30);
 		
-		gridPane.add(playerName, 0, 0, 4, 2);
+		gridPane.add(playerName, 0, 0, 3, 2);
+		gridPane.add(nbVictoryPoint, 3, 0, 2, 2);
 		
 		ImageView tmp = new ImageView(gameView.iManager.getFoodIcon());
 		tmp.setFitHeight(40);
@@ -98,7 +111,9 @@ public class PlayerView {
 		gridPane.add(nbGold, 2, 5);
 		gridPane.add(nbEnergy, 3, 5);
 		gridPane.add(nbConstruction, 4, 5);
-		gridPane.add(tradeButton, 0, 10, 4, 1);
+		
+		gridPane.add(tradeButton, 0, 10, 3, 1);
+		gridPane.add(cardButton, 3, 10, 3, 1);
 		
 		gridPane.setStyle("-fx-background-color: #FFFAF0;");
 		
@@ -106,10 +121,13 @@ public class PlayerView {
 	}
 	
 	public void refresh() {
+		nbVictoryPoint.setText("Score : "+ player.getScore());
+		
 		nbFood.setText(Integer.toString(player.getResourceInventory().getFood()));
 		nbGold.setText(Integer.toString(player.getResourceInventory().getGold()));
 		nbEnergy.setText(Integer.toString(player.getResourceInventory().getEnergy()));
 		nbConstruction.setText(Integer.toString(player.getResourceInventory().getConstruction()));
+		
 		gridPane.getChildren().remove(tradeButton);
 		if (gameView.getGame().getCurrentPlayer().getId() == player.getId()) {
 			gridPane.setBorder(largeBorder);
@@ -117,7 +135,7 @@ public class PlayerView {
 			gridPane.setMaxSize(350, 250);
 		} else {
 			gridPane.setBorder(smallBorder);
-			gridPane.add(tradeButton, 0, 10, 4, 1);
+			gridPane.add(tradeButton, 0, 10, 3, 1);
 			gridPane.setMaxSize(300, 200);
 		}
 		

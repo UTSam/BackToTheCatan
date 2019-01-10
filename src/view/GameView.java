@@ -35,8 +35,6 @@ public class GameView {
 	private boolean isMap3;
 	private boolean isMap4;
 
-	
-	
 	private Game game;
 	
 	private ArrayList<MapView> mapViewList;

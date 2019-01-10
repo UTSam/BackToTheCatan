@@ -1,6 +1,5 @@
 package model;
 
-import java.awt.CardLayout;
 import java.util.ArrayList;
 
 public class Player {
@@ -61,6 +60,10 @@ public class Player {
 
 	public int getScore() {
 		return score;
+	}
+	
+	public ArrayList<Card> getCardInventory() {
+		return cardInventory;
 	}
 	
 	public StatusNodeType chooseNodeStatus() {

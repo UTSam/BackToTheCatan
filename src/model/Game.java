@@ -234,7 +234,11 @@ public class Game {
 	public ArrayList<Player> getPlayerList(){
 		return playerList;
 	}
-
+	
+	public ArrayList<Card> getCardList(){
+		return cardList;
+	}
+	
 	public Player getCurrentPlayer() {
 		return playerTurn;
 	}

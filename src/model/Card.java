@@ -58,19 +58,19 @@ public class Card {
 	}
 
 	public void ActivateDiscoveryEffect(){/*TODO*/
-
+		System.out.println("DISCOVERY");
 	}
 
 	public void ActivateKnightEffect(){/*TODO*/
-
+		System.out.println("KNIGHT");
 	}
 
 	public void ActivateMonopoleEffect(){/*TODO*/
-		/* CLICK SYSTEM */
+		System.out.println("MONOPOLE");
 	}
 
 	public void ActivateRoadConstructionEffect(){/*TODO*/
-
+		System.out.println("CONSTRUCTION");
 	}
 
 	public void ActivateVictoryPointEffect(){
@@ -83,5 +83,9 @@ public class Card {
 
 	public void setPlayer(Player player){
 		this.player=player;
+	}
+	
+	public Boolean isFaceUp() {
+		return faceUp;
 	}
 }
