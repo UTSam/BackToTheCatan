@@ -24,6 +24,7 @@ import view.CardBox;
 import view.DiscoveryBox;
 import view.GameView;
 import view.MainMenu;
+import view.WinnerBox;
 
 public class Main  extends Application{
 
@@ -47,5 +48,6 @@ public class Main  extends Application{
 		GameView gameView = new GameView(game);
 		
 		MainMenu mainMenu = new MainMenu(primaryStage, gameView);
+		WinnerBox.display(game.getPlayerList().get(0));
 	}
 }

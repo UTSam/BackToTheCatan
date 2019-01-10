@@ -355,7 +355,7 @@ public class Game {
 
 	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
-		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
+		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter() && !m.checkMapEdge(n))
 		{
 			n.setTeleporter(true);
 			p.setScore(p.getScore()+1);

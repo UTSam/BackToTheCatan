@@ -3,6 +3,7 @@ package view;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -32,11 +33,21 @@ public class TeleporterBox {
 		GridPane gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
 		gridPane.setVgap(100);
+		gridPane.setHgap(25);
+		
+		Label label = new Label("Choisir l'epoque de destination :");
+		label.setStyle( "-fx-font-size: 40");
+		
+		gridPane.add(label, 0, 0, 3, 1);
 		
 		Button date1 = new Button("1850");
 		Button date2 = new Button("1955");
 		Button date3 = new Button("1985");
 		Button date4 = new Button("2015");
+		date1.setPrefSize(100, 25);
+		date2.setPrefSize(100, 25);
+		date3.setPrefSize(100, 25);
+		date4.setPrefSize(100, 25);
 		
 		date1.setOnAction(e-> {
 			destinationMap = 0;
