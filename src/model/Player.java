@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Player {
-	private static int score;
+	private int score;
 	private int id;
 	private String name;
 	private ResourceInventory resourceInventory;
@@ -106,8 +106,8 @@ public class Player {
 
     }
 
-	public void setScore(int score) {
-		Player.score = score;
+	public void setScore(int s) {
+		score = s;
 	}
 	
 	public void setName(String n){
