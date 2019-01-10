@@ -9,7 +9,7 @@ public class Game {
 	private ArrayList<Resource> resourceList;
 	private ArrayList<Player> playerList;
 	private ArrayList<Card> cardList;
-	
+
 	private PairOfDice pairOfDice;
 
 	private Player playerTurn;
@@ -21,7 +21,7 @@ public class Game {
 		generateMapList();
 		generatePlayerList();
 		generateCardList();
-		
+
 		pairOfDice=new PairOfDice();
 
 		playerTurn=playerList.get(0);
@@ -102,12 +102,12 @@ public class Game {
 			j++;
 		}
 	}
-	
+
 	public void drawCard(Player player){
 		player.addCard(cardList.get(0));
 		cardList.remove(0);
 	}
-	
+
 
 
 	public void printCardList(){
@@ -170,7 +170,7 @@ public class Game {
 		}
 		else
 			playerTurn=playerList.get(0);
-		
+
 		attributeResources(); //TEST
 	}
 
@@ -183,7 +183,7 @@ public class Game {
 
 		pairOfDice.roll();
 
-		System.out.println("de" + pairOfDice.getSum());	
+		System.out.println("de" + pairOfDice.getSum());
 		/* Return the tiles with the corresponding number on the 4 maps*/
 		ArrayList<Tile> tileList=new ArrayList<Tile>();
 		for(Map m:mapList){
@@ -234,15 +234,15 @@ public class Game {
 	public ArrayList<Player> getPlayerList(){
 		return playerList;
 	}
-	
+
 	public ArrayList<Card> getCardList(){
 		return cardList;
 	}
-	
+
 	public Player getCurrentPlayer() {
 		return playerTurn;
 	}
-	
+
 	public PairOfDice getDice() {
 		return pairOfDice;
 	}
@@ -261,7 +261,7 @@ public class Game {
 		resourceList.add(new Resource(ResourceType.MOUNTAIN,0,0,0,0));
 		resourceList.add(new Resource(ResourceType.SEA,0,0,0,0));
 	}
-	
+
 	public void buildDelorean(Node n, Player p,Map m) {
 		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n))
 		{
@@ -298,8 +298,8 @@ public class Game {
 
 
 	}
-	
-	public void buildTeleporter(Node n, Player p)
+
+	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
 		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
 		{
@@ -309,18 +309,20 @@ public class Game {
 			p.getResourceInventory().addGold(-1);
 			p.getResourceInventory().addConstruction(-1);
 			p.getResourceInventory().addFood(-1);
-			
+			return true;
+		}
+			else
+				return false;
+	}
+
+	public void buildDeloreanFree(Node n1, Player p){
+		if (n1.getStatus()==StatusNodeType.EMPTY)
+
+		{
+			n1.setStatus(p.chooseNodeStatus());
 		}
 	}
-	/*public void buildTeleporterFree(Node n1, Player p)
-	{
-		if (n1.getStatus()==StatusNodeType.EMPTY)
-			
-		{	n1.setStatus(p.chooseNodeStatus());
-			n1.setTeleporter(true);
-		
-		}
-	}*/
+
 	public Player getPlayerTurn() {
 		return playerTurn;
 	}

@@ -36,103 +36,105 @@ public class GameView {
 	private boolean isMap4;
 
 	private Game game;
-	
+
 	private ArrayList<MapView> mapViewList;
 	private ArrayList<PlayerView> playerViewList;
 	private WorldMap worldMap;
 	private PlayerBar playerBar;
 	private ActionBar actionBar;
-	
+
 	private BorderPane borderPane;
 	private Stage gameWindow;
 	private Scene scene;
-	
+
 	public IconManager iManager;
 
 	public GameView(Game g){
-		
+
 		iManager = new IconManager();
 		game = g;
 		isMap1=false;
 		isMap2=false;
 		isMap3=false;
 		isMap4=false;
-		
+
 		mapViewList = new ArrayList<MapView>();
 		for (Map m : game.getMapList()) {
 			mapViewList.add(new MapView(m, this));
 		}
 		worldMap = new WorldMap(mapViewList);
 		generateWorldMap();
-		
+
 		playerViewList = new ArrayList<PlayerView>();
 		borderPane = new BorderPane();
 		gameWindow = new Stage();
 		gameWindow.setTitle("gameWindow");
 		scene = new Scene(borderPane, 2000, 1000);
 		gameWindow.setScene(scene);
-		
+
 	}
-	
+
 
 	public void generate() {
 		scene.getStylesheets().add("resources/style.css");
-		
+
 		for (MapView mv : mapViewList) {
 			mv.generate();
 		}
-		
+
 		worldMap.generate();
 		setMapView(worldMap);
-		
+
 		generatePlayerBar();
 		generateActionBar();
-		
+
 		gameWindow.show();
 		gameWindow.setMaximized(true);
 	}
-	
-		
+
+
+
+
 		//GENERATION DES ELEMENTS DE L'IINTERFACE------------------------------------------------------
-	
+
 	private void setMapView(MapView mapView) {
 		borderPane.setCenter(mapView.getBorderPane());
 	}
-	
+
 	private void setMapView(WorldMap worldMap) {
 		borderPane.setCenter(worldMap.getGridPane());
 	}
-	
+
 	private void generateWorldMap(){
-		
+
 		worldMap.getMap1Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
 	        	  setMapView(mapViewList.get(0));isMap1=true;
 	          }
 	        });
-		
+
 		worldMap.getMap2Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
 	        	  setMapView(mapViewList.get(1));isMap2=true;
 	          }
 	        });
-		
+
 		worldMap.getMap3Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
 	        	  setMapView(mapViewList.get(2));isMap3=true;
 	          }
 	        });
-		
+
 		worldMap.getMap4Group().addEventHandler(MouseEvent.MOUSE_PRESSED,
 		        new EventHandler<MouseEvent>() {
 	          public void handle(MouseEvent me) {
 	        	  setMapView(mapViewList.get(3));isMap4=true;
 	          }
 	        });
-		
+
 		for (MapView mv : mapViewList) {
 			mv.getBackButton().addEventHandler(MouseEvent.MOUSE_PRESSED,
 			        new EventHandler<MouseEvent>() {
@@ -147,7 +149,7 @@ public class GameView {
 		}
 	}
 	private void generatePlayerBar() {
-		
+
 		PlayerView p1View = new PlayerView(game.getPlayerList().get(0), Color.RED, this);
 		PlayerView p2View = new PlayerView(game.getPlayerList().get(1), Color.BLUE, this);
 		PlayerView p3View = new PlayerView(game.getPlayerList().get(2), Color.GREEN, this);
@@ -159,14 +161,23 @@ public class GameView {
 		playerBar = new PlayerBar(playerViewList);
 		borderPane.setRight(playerBar.getPlayerVBox());
 	}
-	
+
 	private void generateActionBar() {
 		actionBar = new ActionBar(this);
 		borderPane.setLeft(actionBar.getActionVBox());
-		
-		
+
+
 	}
-	
+
+	public ArrayList<MapView> getMapViewList() {
+		return mapViewList;
+	}
+
+
+	public void setMapViewList(ArrayList<MapView> mapViewList) {
+		this.mapViewList = mapViewList;
+	}
+
 	// GETERS
 	public Game getGame() {
 		return game;
@@ -174,7 +185,7 @@ public class GameView {
 	public ArrayList<PlayerView> getPlayerViewList() {
 		return playerViewList;
 	}
-	
+
 	public boolean isMap1() {
 		return isMap1;
 	}

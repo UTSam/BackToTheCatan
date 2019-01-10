@@ -65,7 +65,7 @@ public class MapView {
 		printTiles(mapGroup);
 		printRoads(mapGroup);
 		printNodes(mapGroup);
-		
+
 		borderPane.setCenter(mapGroup);
 		borderPane.setLeft(backButton);
 	}
@@ -81,7 +81,7 @@ public class MapView {
 		int deltaLengthX = length*86/100;
 		int deltaPosY = length/2;
 
-		
+
 		for (int i = 0; i < 8; i++){
 			for(int j = 0; j < 15; j++){
 
@@ -146,7 +146,7 @@ public class MapView {
 						NodeView.getNodeViewListFromTile(tmpTile, nodeViewList),
 						gameView);
 				tileViewList.add(tmpTileView);
-			} 
+			}
 		}
 		else if (map.getSize()==4) {
 			for (Tile tmpTile : map.getTileList()) {
@@ -161,7 +161,7 @@ public class MapView {
 		}
 
 	}
-	
+
 
 	//AFFICHAGE DES OBJETS-----------------------------------------------------------------------
 	void printTiles (Group group) {
@@ -185,6 +185,14 @@ public class MapView {
 		for (NodeView tmpNodeView : nodeViewList){
 
 			group.getChildren().add(tmpNodeView.getCircle());
+		}
+	}
+
+	public void refreshMap()
+	{
+		for (NodeView n : nodeViewList)
+		{
+			n.refreshColor();
 		}
 	}
 

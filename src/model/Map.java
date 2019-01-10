@@ -276,7 +276,7 @@ public class Map {
 			System.out.println();
 		}
 	}
-	
+
 	public boolean checkNeighbour(Node n)
 	{
 		for (Road r : this.roadList)
@@ -324,13 +324,50 @@ public class Map {
 
 		}
 		return false;
-	}	
+	}
+
+	public boolean checkTP(Player p)
+	{
+		if (this.name =="1985")
+		{return true;}
+		for (int i=0;i<nodeList.length;i++){
+			for(int j=0;j<nodeList[i].length;j++){
+				if (nodeList[i][j].getStatus()==p.chooseNodeStatus() )
+
+				{
+					return true;
+				}
+
+			}
+		}
+
+		return false;
+	}
+	public boolean checkMapEdge(Node n)
+	{
+		if (this.name=="1955" || this.name=="1985")
+		{	 System.out.println("SALUT");
+
+				if (n.equals(this.nodeList[1][9])||n.equals(this.nodeList[1][10])||n.equals(this.nodeList[2][10])||n.equals(this.nodeList[2][11])||n.equals(this.nodeList[3][11])||n.equals(this.nodeList[3][12])||n.equals(this.nodeList[4][11])||n.equals(this.nodeList[4][12])||n.equals(this.nodeList[5][10])||n.equals(this.nodeList[5][11])||n.equals(this.nodeList[6][9])||n.equals(this.nodeList[6][10]))
+				{
+				return true;
+				}
+
+
+		}
+		return false;
+
+	}
 
 	public Node[][] getNodeList() {
 		return nodeList;
 	}
 	public Node getNodeListElem(int i,int j) {
 		return nodeList[i][j];
+	}
+
+	public Node[] getNodeListLine(int i) {
+		return nodeList[i];
 	}
 
 	public void setNodeList(Node[][] nodeList) {
