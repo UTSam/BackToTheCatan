@@ -191,11 +191,18 @@ public class Game {
 	}
 
 	public void nextPlayer(){
-		if(playerTurn.getId()<4){
-			playerTurn=playerList.get(playerTurn.getId());
+		if(playerTurn == playerList.get(0)){
+			playerTurn=playerList.get(1);
 		}
-		else
+		else if(playerTurn == playerList.get(1)){
+			playerTurn=playerList.get(2);
+		}
+		else if(playerTurn == playerList.get(2)){
+			playerTurn=playerList.get(3);
+		}
+		else {
 			playerTurn=playerList.get(0);
+		}
 
 		attributeResources(); //TEST
 	}
@@ -289,7 +296,7 @@ public class Game {
 	}
 
 	public void buildDelorean(Node n, Player p,Map m) {
-		if (p.CheckResource(1, 1, 2, 0) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n))
+		if (p.CheckResource(1, 1, 2, 0) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n) && m.checkTP(getCurrentPlayer()))
 		{
 			n.setStatus(p.chooseNodeStatus());
 			p.setScore(p.getScore()+1);
@@ -326,7 +333,8 @@ public class Game {
 
 	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
-		if (p.CheckResource(0, 3, 1, 0) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
+		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter() && !m.checkMapEdge(n))
+
 		{
 			n.setTeleporter(true);
 			p.setScore(p.getScore()+1);
