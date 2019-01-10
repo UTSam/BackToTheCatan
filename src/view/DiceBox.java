@@ -7,16 +7,18 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import model.Game;
 
 public class DiceBox {
-	public static void display(GameView gv) {
+	public static void display(Game g) {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setWidth(500);
 		window.setHeight(500);
 		window.setResizable(false);
 		
-		Label label = new Label(gv.getGame().getCurrentPlayer().getName() + " vous avez obtenu un " + gv.getGame().getDice().getSum() + " (" + gv.getGame().getDice().getDice1() + " + " + gv.getGame().getDice().getDice2() + ")");
+		Label label = new Label(g.getCurrentPlayer().getName() + " vous avez obtenu un " + g.getDice().getSum() + " (" + g.getDice().getDice1() + " + " + g.getDice().getDice2() + ")\n\n\n\n");
+		label.setStyle( "-fx-font-size: 25;");
 		Button close = new Button("Jouer");
 		close.setPrefSize(200, 100);
 		close.setOnAction(e-> window.close());

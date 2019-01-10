@@ -63,27 +63,7 @@ public class Card {
 		}
 	}
 
-	public void ActivateDiscoveryEffect(){/*TODO*/
-
-		for(int i=0;i<2;i++)
-		{
-			Scanner sc = new Scanner(System.in);
-			char R = sc.next().charAt(0);
-			switch (R)
-			{case 'E' : player.getResourceInventory().setEnergy(player.getResourceInventory().getEnergy()+1);
-			break;
-			case 'C' : player.getResourceInventory().setConstruction(player.getResourceInventory().getConstruction()+1);
-			break;
-			case 'F' : player.getResourceInventory().setFood(player.getResourceInventory().getFood()+1);
-			break;
-			case 'G' : player.getResourceInventory().setGold(player.getResourceInventory().getGold()+1);
-			break;
-
-
-			}
-		}
-
-
+	public void ActivateDiscoveryEffect(){
 
 	}
 

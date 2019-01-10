@@ -213,6 +213,16 @@ public class CardBox {
 		for (Card c : player.getCardInventory()) {
 			if ((c.getCardType() == ct) && (c.isFaceUp() == false)) {
 				c.faceUpCard();
+				if (c.getCardType() == CardType.Discovery) {
+					DiscoveryBox.display(gameView, player);
+					for (PlayerView pv : gameView.getPlayerViewList()) {
+						pv.refresh();
+					}
+					DiscoveryBox.display(gameView, player);
+					for (PlayerView pv : gameView.getPlayerViewList()) {
+						pv.refresh();
+					}
+				}
 				refresh();
 				return 1;
 			}

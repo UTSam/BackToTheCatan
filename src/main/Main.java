@@ -21,6 +21,7 @@ import model.CardType;
 import model.Game;
 import model.Map;
 import view.CardBox;
+import view.DiscoveryBox;
 import view.GameView;
 import view.MainMenu;
 
