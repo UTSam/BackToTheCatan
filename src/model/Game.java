@@ -242,6 +242,10 @@ public class Game {
 	public Player getCurrentPlayer() {
 		return playerTurn;
 	}
+	
+	public PairOfDice getDice() {
+		return pairOfDice;
+	}
 
 
 	private void initializeResourceList(){

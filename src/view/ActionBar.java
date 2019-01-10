@@ -50,6 +50,7 @@ public class ActionBar {
 			for (PlayerView pv : gameView.getPlayerViewList()) {
 				pv.refresh();
 			}
+			DiceBox.display(gameView);
 		} );
 		
 		actionVBox.getChildren().addAll(buildRoadButton, buildDeloreanButton, buildConverterButton, nextTurnButton);
