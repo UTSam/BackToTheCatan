@@ -38,11 +38,11 @@ public class Game {
 
 	private void generateMapList(){
 		mapList=new ArrayList<Map>();
-
-		mapList.add(new Map("1850",4,1,1,4,3,4,3,2));
-		mapList.add(new Map("1955",5,1,1,4,3,4,3,2));
+		//int woodQuantity, int coalQuantity, int foodQuantity, int metalQuantity, int oilQuantity, int plutoniumQuantity, int GoldQuantity
+		mapList.add(new Map("1850",4,3,3,3,1,0,0,3));
+		mapList.add(new Map("1955",5,3,3,3,3,4,0,2));
 		mapList.add(new Map("1985",5,1,1,4,3,4,3,2));
-		mapList.add(new Map("2015",4,1,1,4,3,4,3,2));
+		mapList.add(new Map("2015",4,0,0,3,3,1,4,2));
 
 		//Generation of the maps
 		for (Map m : mapList) {
@@ -83,34 +83,6 @@ public class Game {
 		triBulleCroissant(playerRoll);
 	}
 
-	private void triBulleCroissant(int tableau[][]) {
-		int longueur = tableau.length;
-		int tampon[] = {0,0};
-		boolean permut;
-		Player playerTemp1,playerTemp2;
-
-		do {
-			// hypothèse : le tableau est trié
-			permut = false;
-			for (int i = 0; i < longueur - 1; i++) {
-				// Teste si 2 éléments successifs sont dans le bon ordre ou non
-				if (tableau[i][1] < tableau[i + 1][1]) {
-					// s'ils ne le sont pas, on échange leurs positions
-
-					playerTemp1=playerList.get(i);
-					playerTemp2=playerList.get(i+1);
-					playerList.set(i, playerTemp2);
-					playerList.set(i+1, playerTemp1);
-
-					tampon = tableau[i];
-					tableau[i] = tableau[i + 1];
-					tableau[i + 1] = tampon;
-
-					permut = true;
-				}
-			}
-		} while (permut);
-	}
 
 	private void generateCardList(){
 		cardList = new ArrayList<Card>();
@@ -308,7 +280,7 @@ public class Game {
 		resourceList.add(new Resource(ResourceType.WOOD,0,0,1,0));
 		resourceList.add(new Resource(ResourceType.COAL,0,1,0,0));
 		resourceList.add(new Resource(ResourceType.FOOD,1,0,0,0));
-		resourceList.add(new Resource(ResourceType.METAL,0,0,1,0));
+		resourceList.add(new Resource(ResourceType.METAL,0,0,2,0));
 		resourceList.add(new Resource(ResourceType.OIL,0,1,1,0));
 		resourceList.add(new Resource(ResourceType.PLUTONIUM,0,2,0,0));
 		resourceList.add(new Resource(ResourceType.GOLD,0,0,0,1));
@@ -317,13 +289,12 @@ public class Game {
 	}
 
 	public void buildDelorean(Node n, Player p,Map m) {
-		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n))
+		if (p.CheckResource(1, 1, 2, 0) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n))
 		{
 			n.setStatus(p.chooseNodeStatus());
 			p.setScore(p.getScore()+1);
 			p.getResourceInventory().addEnergy(-1);
-			p.getResourceInventory().addGold(-1);
-			p.getResourceInventory().addConstruction(-1);
+			p.getResourceInventory().addConstruction(-2);
 			p.getResourceInventory().addFood(-1);
 
 		}
@@ -340,12 +311,12 @@ public class Game {
 	}
 
 	public void buildRoad(Road r, Player p, Map m) {
-		if (p.CheckResource(1, 1, 1, 1) && r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p))
+						 /*(f, e, c, g)*/
+		if (p.CheckResource(1, 1, 1, 0) && r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p) && m.checkTP(p))
 		{
 			r.setStatus(p.chooseRoadStatus());
 			p.setScore(p.getScore()+1);
 			p.getResourceInventory().addEnergy(-1);
-			p.getResourceInventory().addGold(-1);
 			p.getResourceInventory().addConstruction(-1);
 			p.getResourceInventory().addFood(-1);
 		}
@@ -355,14 +326,12 @@ public class Game {
 
 	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
-		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
+		if (p.CheckResource(0, 3, 1, 0) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter())
 		{
 			n.setTeleporter(true);
 			p.setScore(p.getScore()+1);
-			p.getResourceInventory().addEnergy(-1);
-			p.getResourceInventory().addGold(-1);
+			p.getResourceInventory().addEnergy(-3);
 			p.getResourceInventory().addConstruction(-1);
-			p.getResourceInventory().addFood(-1);
 			return true;
 		}
 			else
@@ -385,6 +354,34 @@ public class Game {
 		this.playerTurn = playerTurn;
 	}
 
+	private void triBulleCroissant(int tableau[][]) {
+		int longueur = tableau.length;
+		int tampon[] = {0,0};
+		boolean permut;
+		Player playerTemp1,playerTemp2;
+
+		do {
+			// hypothèse : le tableau est trié
+			permut = false;
+			for (int i = 0; i < longueur - 1; i++) {
+				// Teste si 2 éléments successifs sont dans le bon ordre ou non
+				if (tableau[i][1] < tableau[i + 1][1]) {
+					// s'ils ne le sont pas, on échange leurs positions
+
+					playerTemp1=playerList.get(i);
+					playerTemp2=playerList.get(i+1);
+					playerList.set(i, playerTemp2);
+					playerList.set(i+1, playerTemp1);
+
+					tampon = tableau[i];
+					tableau[i] = tableau[i + 1];
+					tableau[i + 1] = tampon;
+
+					permut = true;
+				}
+			}
+		} while (permut);
+	}
 
 
 
