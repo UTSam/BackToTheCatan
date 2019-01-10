@@ -346,8 +346,7 @@ public class Map {
 	public boolean checkMapEdge(Node n)
 	{
 		if (this.name=="1955" || this.name=="1985")
-		{	 System.out.println("SALUT");
-
+		{
 				if (n.equals(this.nodeList[1][9])||n.equals(this.nodeList[1][10])||n.equals(this.nodeList[2][10])||n.equals(this.nodeList[2][11])||n.equals(this.nodeList[3][11])||n.equals(this.nodeList[3][12])||n.equals(this.nodeList[4][11])||n.equals(this.nodeList[4][12])||n.equals(this.nodeList[5][10])||n.equals(this.nodeList[5][11])||n.equals(this.nodeList[6][9])||n.equals(this.nodeList[6][10]))
 				{
 				return true;

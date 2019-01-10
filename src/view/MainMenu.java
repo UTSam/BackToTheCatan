@@ -48,10 +48,20 @@ public class MainMenu {
 		startButton.setOnAction( e -> {
 			ArrayList<Player> tmpList = new ArrayList<Player>();
 			tmpList = gameView.getGame().getPlayerList();
-			tmpList.get(0).setName(name1.getText());
-			tmpList.get(1).setName(name2.getText());
-			tmpList.get(2).setName(name3.getText());
-			tmpList.get(3).setName(name4.getText());
+			for (Player p : gameView.getGame().getPlayerList()) {
+				if (p.getId() == 1) {
+					p.setName(name1.getText());
+				}
+				if (p.getId() == 2) {
+					p.setName(name2.getText());
+				}
+				if (p.getId() == 3) {
+					p.setName(name3.getText());
+				}
+				if (p.getId() == 4) {
+					p.setName(name4.getText());
+				}
+			}
 			gameView.generate();
 			primaryStage.close();
 		});
