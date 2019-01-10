@@ -13,6 +13,8 @@ public class Map {
 	private int[][] patern;
 
 
+
+
 	private int tileRepartition[];
 
 	public Map () {
@@ -20,6 +22,8 @@ public class Map {
 		nodeList=new Node[8][15]; //TODO VARIABLE GLOBALE
 		roadList= new ArrayList<Road>();
 		tileList= new ArrayList<Tile>();
+
+
 	}
 
 	public Map (String name, int woodQuantity, int coalQuantity, int foodQuantity, int metalQuantity, int oilQuantity, int plutoniumQuantity, int GoldQuantity){
@@ -356,6 +360,21 @@ public class Map {
 		}
 		return false;
 
+	}
+
+	public boolean checkNeighbourDR(Node n, Player p)
+	{	for (Road r : roadList)
+		{
+			if(r.getNode1()==n || r.getNode2()==n)
+			{
+				if(r.getStatus()==p.chooseRoadStatus())
+					{
+					return true;
+					}
+			}
+	}
+
+		return false;
 	}
 
 	public Node[][] getNodeList() {

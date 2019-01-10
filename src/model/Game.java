@@ -18,6 +18,8 @@ public class Game {
 	private Player playerTurn;
 	private int scoreToWin;
 
+	private boolean firstTurn;
+
 	public Game () {
 
 		pairOfDice=new PairOfDice();
@@ -27,7 +29,7 @@ public class Game {
 		generatePlayerList();
 		generateCardList();
 
-
+		firstTurn=true;
 
 
 
@@ -296,7 +298,7 @@ public class Game {
 	}
 
 	public void buildDelorean(Node n, Player p,Map m) {
-		if (p.CheckResource(1, 1, 2, 0) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n) && m.checkTP(getCurrentPlayer()))
+		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n) && m.checkTP(getCurrentPlayer()) && m.checkNeighbourDR(n, p))
 		{
 			n.setStatus(p.chooseNodeStatus());
 			p.setScore(p.getScore()+1);
@@ -331,6 +333,16 @@ public class Game {
 
 	}
 
+	public void buildRoadFree(Road r, Player p, Map m) {
+		if (r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p))
+		{
+			r.setStatus(p.chooseRoadStatus());
+
+		}
+
+
+	}
+
 	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
 		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter() && !m.checkMapEdge(n))
@@ -351,6 +363,15 @@ public class Game {
 
 		{
 			n1.setStatus(p.chooseNodeStatus());
+		}
+	}
+
+	public void buildDeloreanBegin(Node n1, Player p){
+		if (n1.getStatus()==StatusNodeType.EMPTY)
+
+		{
+			n1.setStatus(p.chooseNodeStatus());
+			p.setScore(p.getScore()+1);
 		}
 	}
 

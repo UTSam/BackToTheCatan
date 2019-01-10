@@ -46,6 +46,7 @@ public class Card {
 			ActivateDiscoveryEffect();
 			break;
 		case Knight:
+			player.increaseKnightPoint();
 			//ActivateKnightEffect(Tile); // ICI JE SAIS PAS COMMENT RECUPERER TILE
 			break;
 		case Monopole:

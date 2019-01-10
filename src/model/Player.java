@@ -285,4 +285,12 @@ public class Player {
 		}
 		return false;
 	}
+
+	public int getKnightPoint(){
+		return knightPoint;
+	}
+
+	public void increaseKnightPoint(){
+		knightPoint++;
+	}
 }

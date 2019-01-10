@@ -79,15 +79,15 @@ public class NodeView {
 		            	{
 		            		if (gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn(),gameView.getGame().getMapList().get(0))) {
 		            			refreshColor();
-		            			TeleporterBox tpBox = new TeleporterBox(gameView, node, 0);
+		            			TeleporterBox tpBox = new TeleporterBox(gameView, node, 1);
 		            			tpBox.display();
-		            		}	
+		            		}
 		            	}
 		            	if (gameView.isMap2())
 		            	{
 		            		if (gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn(),gameView.getGame().getMapList().get(1))) {
 		            			refreshColor();
-	            				TeleporterBox tpBox = new TeleporterBox(gameView, node, 0);
+	            				TeleporterBox tpBox = new TeleporterBox(gameView, node, 2);
 	            				tpBox.display();
 		            		}
 		            	}
@@ -96,7 +96,7 @@ public class NodeView {
 		            		if(gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn(),gameView.getGame().getMapList().get(2)))
 		            		{
 		            			refreshColor();
-		            			TeleporterBox tpBox = new TeleporterBox(gameView, node, 0);
+		            			TeleporterBox tpBox = new TeleporterBox(gameView, node, 3);
 		            			tpBox.display();
 		            		}
 		            	}
@@ -109,7 +109,7 @@ public class NodeView {
 		            		}
 		            	}
 		            }
-		            
+
 		        	for (PlayerView pv : gameView.getPlayerViewList())
             		{
 		        		pv.refresh();
