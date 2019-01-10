@@ -51,27 +51,63 @@ public class RoadView {
 		          " to "+
 		          nodeView2.getNode().getX()+ " " +
 		          nodeView2.getNode().getY());
+		            
+		            	if (!(gameView.getGame().getCurrentPlayer().getFirstRoad())
+		            			&& gameView.getGame().isFirstTurn())
+		            	{
+		            		gameView.getGame().buildRoadFree(road, gameView.getGame().getCurrentPlayer(), gameView.getGame().getMapList().get(2));
+		            		refreshColor();
+		            		if ( (gameView.getGame().getCurrentPlayer().getFirstDelorean()) 
+		            				&& gameView.getGame().getCurrentPlayer().getFirstRoad()) {
+		            			gameView.getGame().nextPlayer();
+		            			if (gameView.getGame().getCurrentPlayer().getId() == 1) {
+		            				gameView.getGame().previousPlayer();
+		            				gameView.getGame().setSecondTurn(true);
+		            				gameView.getGame().setFirstTurn(false);
+		            			}
+		            		}
+		            	} else if (!(gameView.getGame().getCurrentPlayer().getSecondRoad()) 
+		            			&& gameView.getGame().isSecondTurn())
+		            	{
+		            		gameView.getGame().buildRoadFree(road, gameView.getGame().getCurrentPlayer(), gameView.getGame().getMapList().get(2));
+		            		refreshColor();
+		            		if ( (gameView.getGame().getCurrentPlayer().getSecondDelorean()) 
+		            				&& gameView.getGame().getCurrentPlayer().getSecondRoad()) {
+		            			gameView.getGame().previousPlayer();
+		            			if (gameView.getGame().getCurrentPlayer().getId() == 4) {
+		            				gameView.disableButtons(false);
+		            				gameView.getGame().nextPlayer();
+		            				gameView.getGame().attributeResources();
+		            				DiceBox.display(gameView.getGame());
+		            			}
+		            		}
+		            	}
+		            
 		            if (gameView.getActionBar().isRB())
 		            {
-
 		            	if (gameView.isMap1())
-		            	{ System.out.println("ca marche");
+		            	{
 		            		gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(0));
 		            	refreshColor();}
 		            	if (gameView.isMap2())
 		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(1));refreshColor();}
 		            	if (gameView.isMap3())
-		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(2));refreshColor();}
+		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(2));refreshColor();
+		            	}
 		            	if (gameView.isMap4())
 		            	{gameView.getGame().buildRoad(road, gameView.getGame().getPlayerTurn(), gameView.getGame().getMapList().get(3));refreshColor();}
-		            	for (PlayerView pv : gameView.getPlayerViewList())
-	            		{
-	            		pv.refresh();
-	            		}
 		            }
+		            for (PlayerView pv : gameView.getPlayerViewList())
+				  	{
+			        	pv.refresh();
+				  	}
+			        for (MapView mv : gameView.getMapViewList())
+					{
+						mv.refreshMap();
+					}
 		          }
-		          
 		        });
+		  	
 	}
 	
 	public Line getUnderLine() {

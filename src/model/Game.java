@@ -19,6 +19,7 @@ public class Game {
 	private int scoreToWin;
 
 	private boolean firstTurn;
+	private boolean secondTurn;
 
 	public Game () {
 
@@ -30,7 +31,7 @@ public class Game {
 		generateCardList();
 
 		firstTurn=true;
-
+		secondTurn=false;
 
 
 		playerTurn=playerList.get(0);
@@ -205,8 +206,21 @@ public class Game {
 		else {
 			playerTurn=playerList.get(0);
 		}
-
-		attributeResources(); //TEST
+	}
+	
+	public void previousPlayer(){
+		if(playerTurn == playerList.get(0)){
+			playerTurn=playerList.get(3);
+		}
+		else if(playerTurn == playerList.get(1)){
+			playerTurn=playerList.get(0);
+		}
+		else if(playerTurn == playerList.get(2)){
+			playerTurn=playerList.get(1);
+		}
+		else {
+			playerTurn=playerList.get(2);
+		}
 	}
 
 	public int throwDice(){
@@ -298,7 +312,7 @@ public class Game {
 	}
 
 	public void buildDelorean(Node n, Player p,Map m) {
-		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n) && m.checkTP(getCurrentPlayer()) && m.checkNeighbourDR(n, p))
+		if (p.CheckResource(1, 1, 2, 0) && n.getStatus()==StatusNodeType.EMPTY && !m.checkNeighbour(n) && m.checkTP(getCurrentPlayer()) && m.checkNeighbourDR(n, p))
 		{
 			n.setStatus(p.chooseNodeStatus());
 			p.setScore(p.getScore()+1);
@@ -336,16 +350,18 @@ public class Game {
 	public void buildRoadFree(Road r, Player p, Map m) {
 		if (r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p))
 		{
+			if (p.getFirstRoad() == false) {
+				p.setFirstRoad(true);
+			} else {
+				p.setSecondRoad(true);
+			}
 			r.setStatus(p.chooseRoadStatus());
-
 		}
-
-
 	}
 
 	public boolean buildTeleporter(Node n, Player p, Map m)
 	{
-		if (p.CheckResource(1, 1, 1, 1) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter() && !m.checkMapEdge(n))
+		if (p.CheckResource(0, 3, 1, 0) && n.getStatus()==p.chooseNodeStatus() && !n.isTeleporter() && !m.checkMapEdge(n))
 
 		{
 			n.setTeleporter(true);
@@ -367,11 +383,16 @@ public class Game {
 	}
 
 	public void buildDeloreanBegin(Node n1, Player p){
-		if (n1.getStatus()==StatusNodeType.EMPTY)
+		if (n1.getStatus()==StatusNodeType.EMPTY && !(mapList.get(2).checkNeighbour(n1)))
 
 		{
 			n1.setStatus(p.chooseNodeStatus());
 			p.setScore(p.getScore()+1);
+			if (p.getFirstDelorean() == false) {
+				p.setFirstDelorean(true);
+			} else {
+				p.setSecondDelorean(true);
+			}		
 		}
 	}
 
@@ -412,7 +433,19 @@ public class Game {
 		} while (permut);
 	}
 
-
-
-
+	public Boolean isFirstTurn() {
+		return firstTurn;
+	}
+	
+	public void setFirstTurn(Boolean bool) {
+		firstTurn = bool;
+	}
+	
+	public Boolean isSecondTurn() {
+		return secondTurn;
+	}
+	
+	public void setSecondTurn(Boolean bool) {
+		secondTurn = bool;
+	}
 }

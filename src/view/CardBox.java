@@ -141,10 +141,12 @@ public class CardBox {
 			icons.add(gold, 1,34);
 			icons.add(energy, 2,34);
 			icons.add(construction, 3,34);
+			
+			
 
 			Label l1 = new Label("1");
 			Label l2 = new Label("1");
-			Label l3 = new Label("1");
+			Label l3 = new Label("0");
 			Label l4 = new Label("1");
 
 			l1.setStyle( "-fx-font-size: 20");

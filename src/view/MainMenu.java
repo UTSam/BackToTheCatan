@@ -46,8 +46,6 @@ public class MainMenu {
 		Button startButton = new Button("JOUER");
 		startButton.setStyle( "-fx-font-size: 40;");
 		startButton.setOnAction( e -> {
-			ArrayList<Player> tmpList = new ArrayList<Player>();
-			tmpList = gameView.getGame().getPlayerList();
 			for (Player p : gameView.getGame().getPlayerList()) {
 				if (p.getId() == 1) {
 					p.setName(name1.getText());
@@ -62,6 +60,11 @@ public class MainMenu {
 					p.setName(name4.getText());
 				}
 			}
+			gameView.getGame().getPlayerList().get(0).setID(1);
+			gameView.getGame().getPlayerList().get(1).setID(2);
+			gameView.getGame().getPlayerList().get(2).setID(3);
+			gameView.getGame().getPlayerList().get(3).setID(4);
+			
 			gameView.generate();
 			primaryStage.close();
 		});

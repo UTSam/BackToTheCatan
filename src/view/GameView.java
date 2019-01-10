@@ -90,9 +90,22 @@ public class GameView {
 
 		gameWindow.show();
 		gameWindow.setMaximized(true);
+		
+		startPhase();
 	}
 
 
+		//PREMIERE PHASE DE JEU
+	private void startPhase() {
+		disableButtons(true);
+		getGame().setFirstTurn(true);
+	}
+	
+	//DESACTIVE TOUS LES BOUTONS
+	public void disableButtons(Boolean bool) {
+		actionBar.disableButtons(bool);
+		playerBar.disableButtons(bool);
+	}
 
 
 		//GENERATION DES ELEMENTS DE L'IINTERFACE------------------------------------------------------

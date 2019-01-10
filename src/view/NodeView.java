@@ -104,11 +104,45 @@ public class NodeView {
 		            	{
 		            		if(gameView.getGame().buildTeleporter(node, gameView.getGame().getPlayerTurn(),gameView.getGame().getMapList().get(3))){
 		            			refreshColor();
-	            				TeleporterBox tpBox = new TeleporterBox(gameView, node, 0);
+	            				TeleporterBox tpBox = new TeleporterBox(gameView, node, 4);
 	            				tpBox.display();
 		            		}
 		            	}
 		            }
+		            
+		            	if (gameView.isMap3() 
+		            			&& !(gameView.getGame().getCurrentPlayer().getFirstDelorean()) 
+		            			&& gameView.getGame().isFirstTurn())
+		            	{
+		            		gameView.getGame().buildDeloreanBegin(node, gameView.getGame().getCurrentPlayer());
+		            		refreshColor();
+		            		if ( gameView.getGame().getCurrentPlayer().getFirstDelorean() 
+		            				&& gameView.getGame().getCurrentPlayer().getFirstRoad()) {
+		            			gameView.getGame().nextPlayer();
+		            			if (gameView.getGame().getCurrentPlayer().getId() == 1) {
+		            				gameView.getGame().previousPlayer();
+		            				gameView.getGame().setSecondTurn(true);
+		            				gameView.getGame().setFirstTurn(false);
+		            			}
+		            		}
+		            		
+		            	}	else if (gameView.isMap3() 
+		            			&& !(gameView.getGame().getCurrentPlayer().getSecondDelorean()) 
+		            			&& gameView.getGame().isSecondTurn())
+		            	{
+		            		gameView.getGame().buildDeloreanBegin(node, gameView.getGame().getCurrentPlayer());
+		            		refreshColor();
+		            		if ( gameView.getGame().getCurrentPlayer().getSecondDelorean() 
+		            				&& gameView.getGame().getCurrentPlayer().getSecondRoad()) {
+		            			gameView.getGame().previousPlayer();
+		            			if (gameView.getGame().getCurrentPlayer().getId() == 4) {
+		            				gameView.disableButtons(false);
+		            				gameView.getGame().nextPlayer();
+		            				gameView.getGame().attributeResources();
+		            				DiceBox.display(gameView.getGame());
+		            			}
+		            		}
+		            	}	
 
 		        	for (PlayerView pv : gameView.getPlayerViewList())
             		{
@@ -119,6 +153,7 @@ public class NodeView {
 						mv.refreshMap();
 					}
 		          }
+		          
 		        });
 	}
 

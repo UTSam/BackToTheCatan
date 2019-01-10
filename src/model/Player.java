@@ -13,8 +13,16 @@ public class Player {
 	private int nbCard;
 	private int knightPoint;
 
+	private Boolean firstRoad;
+	private Boolean firstDelorean;
+	
+	private Boolean secondRoad;
+	private Boolean secondDelorean;
+	
 	private ArrayList<Road> RoadList;
 	private ArrayList<ArrayList<Road>> SuperRoadList;
+	
+	private int nbVisited;
 
 
 	public Player(int id, String name) {
@@ -23,24 +31,15 @@ public class Player {
 		resourceInventory = new ResourceInventory();
 		score=0;
 		knightPoint=0;
+		firstRoad = false;
+		firstDelorean = false;
+		secondRoad = false;
+		secondDelorean = false;		
 	}
 
 	public ResourceInventory getResourceInventory(){
 		return resourceInventory;
 	}
-
-	/*public void trade(ResourceType r1, int n1 , ResourceType r2, int n2, Player Player2 ) {
-		this.resourceInventory.setType(r1);
-		this.resourceInventory.addResource(n1);
-		this.resourceInventory.setType(r2);
-		this.resourceInventory.removeResource(n2);
-
-		Player2.resourceInventory.setType(r2);
-		Player2.resourceInventory.addResource(n2);
-		Player2.resourceInventory.setType(r1);
-		Player2.resourceInventory.removeResource(n1);
-
-	}*/
 
 	public void addVictoryPoint(){
 		score++;
@@ -48,6 +47,7 @@ public class Player {
 
 	public void addCard(Card card){
 		cardInventory.add(card);
+		card.setPlayer(this);
 	}
 
 	public void addKnightPoint(){
@@ -57,7 +57,9 @@ public class Player {
 	public int getId() {
 		return id;
 	}
-
+	public void setID(int i) {
+		id = i;
+	}
 	public String getName() {
 		return name;
 	}
@@ -292,5 +294,37 @@ public class Player {
 
 	public void increaseKnightPoint(){
 		knightPoint++;
+	}
+	
+	public Boolean getFirstRoad() {
+		return firstRoad;
+	}
+	
+	public void setFirstRoad(Boolean bool) {
+		firstRoad = bool;
+	}
+	
+	public Boolean getFirstDelorean() {
+		return firstDelorean;
+	}
+	
+	public void setFirstDelorean(Boolean bool) {
+		firstDelorean = bool;
+	}
+	
+	public Boolean getSecondRoad() {
+		return secondRoad;
+	}
+	
+	public void setSecondRoad(Boolean bool) {
+		secondRoad = bool;
+	}
+	
+	public Boolean getSecondDelorean() {
+		return secondDelorean;
+	}
+	
+	public void setSecondDelorean(Boolean bool) {
+		secondDelorean = bool;
 	}
 }

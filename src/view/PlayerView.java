@@ -27,6 +27,7 @@ public class PlayerView {
 	private Color color;
 	
 	private Label nbVictoryPoint;
+	private Label nbArmyPoint;
 	private Label nbFood;
 	private Label nbGold;
 	private Label nbEnergy;
@@ -43,7 +44,7 @@ public class PlayerView {
 		color = c;
 		
 		smallBorder = new Border(new BorderStroke(color, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(6)));
-		largeBorder = new Border(new BorderStroke(color, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(12)));
+		largeBorder = new Border(new BorderStroke(color, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(18)));
 		gridPane = new GridPane();
 		gridPane.setPrefSize(300, 200);
 		gridPane.setVgap(5);
@@ -51,6 +52,8 @@ public class PlayerView {
 		
 		nbVictoryPoint = new Label();
 		nbVictoryPoint.setStyle("-fx-font-size: 20; -fx-text-fill: #000000	;");
+		nbArmyPoint = new Label();
+		nbArmyPoint.setStyle("-fx-font-size: 20; -fx-text-fill: #000000	;");
 		
 		nbFood = new Label();
 		nbGold = new Label();
@@ -81,7 +84,8 @@ public class PlayerView {
 		gridPane.setHgap(30);
 		
 		gridPane.add(playerName, 0, 0, 3, 2);
-		gridPane.add(nbVictoryPoint, 3, 0, 2, 2);
+		gridPane.add(nbVictoryPoint, 3, 0, 2, 1);
+		gridPane.add(nbArmyPoint, 3, 1, 2, 1);
 		
 		ImageView tmp = new ImageView(gameView.iManager.getFoodIcon());
 		tmp.setFitHeight(40);
@@ -122,6 +126,7 @@ public class PlayerView {
 	
 	public void refresh() {
 		nbVictoryPoint.setText("Score : "+ player.getScore());
+		nbArmyPoint.setText("Armee : "+ player.getKnightPoint());
 		
 		nbFood.setText(Integer.toString(player.getResourceInventory().getFood()));
 		nbGold.setText(Integer.toString(player.getResourceInventory().getGold()));
@@ -143,5 +148,10 @@ public class PlayerView {
 	
 	public GridPane getGridPane() {
 		return gridPane;
+	}
+	
+	public void disableButtons(Boolean bool) {
+		tradeButton.setDisable(bool);
+		cardButton.setDisable(bool);
 	}
 }

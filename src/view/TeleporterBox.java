@@ -27,16 +27,17 @@ public class TeleporterBox {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
 		window.setWidth(500);
-		window.setHeight(500);
+		window.setHeight(400);
 		window.setResizable(false);
 		
 		GridPane gridPane = new GridPane();
 		gridPane.setAlignment(Pos.CENTER);
-		gridPane.setVgap(100);
+		gridPane.setVgap(50);
 		gridPane.setHgap(25);
 		
-		Label label = new Label("Choisir l'epoque de destination :");
+		Label label = new Label("Choisir l'epoque de \ndestination :");
 		label.setStyle( "-fx-font-size: 40");
+		label.setAlignment(Pos.CENTER);
 		
 		gridPane.add(label, 0, 0, 3, 1);
 		
@@ -44,10 +45,10 @@ public class TeleporterBox {
 		Button date2 = new Button("1955");
 		Button date3 = new Button("1985");
 		Button date4 = new Button("2015");
-		date1.setPrefSize(100, 25);
-		date2.setPrefSize(100, 25);
-		date3.setPrefSize(100, 25);
-		date4.setPrefSize(100, 25);
+		date1.setPrefSize(125, 50);
+		date2.setPrefSize(125, 50);
+		date3.setPrefSize(125, 50);
+		date4.setPrefSize(125, 50);
 		
 		date1.setOnAction(e-> {
 			destinationMap = 0;
@@ -74,22 +75,22 @@ public class TeleporterBox {
 		});
 		
 		switch (mapID){
-		case 0 : 
-			gridPane.add(date2, 0, 2);
-			gridPane.add(date3, 1, 2);
-			gridPane.add(date4, 2, 2);
-		break;
 		case 1 : 
-			gridPane.add(date1, 0, 2);
+			gridPane.add(date2, 0, 2);
 			gridPane.add(date3, 1, 2);
 			gridPane.add(date4, 2, 2);
 		break;
 		case 2 : 
 			gridPane.add(date1, 0, 2);
-			gridPane.add(date2, 1, 2);
+			gridPane.add(date3, 1, 2);
 			gridPane.add(date4, 2, 2);
 		break;
 		case 3 : 
+			gridPane.add(date1, 0, 2);
+			gridPane.add(date2, 1, 2);
+			gridPane.add(date4, 2, 2);
+		break;
+		case 4 : 
 			gridPane.add(date1, 0, 2);
 			gridPane.add(date2, 1, 2);
 			gridPane.add(date3, 2, 2);
