@@ -1,6 +1,9 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+
+import view.DiceBox;
 
 public class Game {
 
@@ -17,12 +20,16 @@ public class Game {
 
 	public Game () {
 
+		pairOfDice=new PairOfDice();
+
 		generateResourceList();
 		generateMapList();
 		generatePlayerList();
 		generateCardList();
 
-		pairOfDice=new PairOfDice();
+
+
+
 
 		playerTurn=playerList.get(0);
 		scoreToWin=10;
@@ -49,13 +56,60 @@ public class Game {
 		initializeResourceList();
 	}
 
-	private void generatePlayerList(){
+	private void generatePlayerList(){ /* A ENLEVER */
+
 		playerList=new ArrayList<Player>();
 
 		playerList.add(new Player(1, "Joueur 1"));
 		playerList.add(new Player(2, "Joueur 2"));
 		playerList.add(new Player(3, "Joueur 3"));
 		playerList.add(new Player(4, "Joueur 4"));
+
+		GeneratePlayerOrder();
+	}
+
+	/* Can be upgraded*/
+	private void GeneratePlayerOrder(){ /* Fonction that set the order of the player */
+
+		int playerRoll[][]=new int[4][2],i;
+
+		for(i=0;i<4;i++){
+			playerRoll[i][0]=i+1;
+			playerRoll[i][1]=pairOfDice.roll();
+			System.out.println("lancé de dé:"+ pairOfDice.getSum());
+			//DiceBox.display(this);
+		}
+
+		triBulleCroissant(playerRoll);
+	}
+
+	private void triBulleCroissant(int tableau[][]) {
+		int longueur = tableau.length;
+		int tampon[] = {0,0};
+		boolean permut;
+		Player playerTemp1,playerTemp2;
+
+		do {
+			// hypothèse : le tableau est trié
+			permut = false;
+			for (int i = 0; i < longueur - 1; i++) {
+				// Teste si 2 éléments successifs sont dans le bon ordre ou non
+				if (tableau[i][1] < tableau[i + 1][1]) {
+					// s'ils ne le sont pas, on échange leurs positions
+
+					playerTemp1=playerList.get(i);
+					playerTemp2=playerList.get(i+1);
+					playerList.set(i, playerTemp2);
+					playerList.set(i+1, playerTemp1);
+
+					tampon = tableau[i];
+					tableau[i] = tableau[i + 1];
+					tableau[i + 1] = tampon;
+
+					permut = true;
+				}
+			}
+		} while (permut);
 	}
 
 	private void generateCardList(){
@@ -330,6 +384,8 @@ public class Game {
 	public void setPlayerTurn(Player playerTurn) {
 		this.playerTurn = playerTurn;
 	}
+
+
 
 
 
