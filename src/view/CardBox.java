@@ -75,7 +75,7 @@ public class CardBox {
 			}
 			GridPane.setValignment(drawCardButton, VPos.TOP);
 			drawCardButton.setOnAction(e -> {
-				if (player.CheckResource(0, 1, 1, 1) ){
+				if (player.CheckResource(1, 0, 1, 1) ){
 
 						player.getResourceInventory().addEnergy(0);
 						player.getResourceInventory().addFood(-1);
@@ -212,15 +212,23 @@ public class CardBox {
 		for (Card c : player.getCardInventory()) {
 			if ((c.getCardType() == ct) && (c.isFaceUp() == false)) {
 				c.faceUpCard();
+				if(c.getCardType() == CardType.Knight)
+				{
+					gameView.getGame().firstArmy();
+				}
 				if (c.getCardType() == CardType.Discovery) {
 					DiscoveryBox.display(gameView, player);
 					for (PlayerView pv : gameView.getPlayerViewList()) {
 						pv.refresh();
 					}
 					DiscoveryBox.display(gameView, player);
-					for (PlayerView pv : gameView.getPlayerViewList()) {
-						pv.refresh();
-					}
+				}
+				
+				if (c.getCardType() == CardType.Monopole) {
+					MonopoleBox.display(gameView, player);
+				}
+				for (PlayerView pv : gameView.getPlayerViewList()) {
+					pv.refresh();
 				}
 				refresh();
 				return 1;

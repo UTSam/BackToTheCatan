@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 import view.DiceBox;
+import view.WinnerBox;
 
 public class Game {
 
@@ -148,7 +149,17 @@ public class Game {
 	}
 
 	public void Run(){
-
+		/*boolean hasWin=false;
+		while(hasWin=false){
+			for(Player player: playerList){
+				if (player.getScore()>=scoreToWin){
+					hasWin=true;
+				}
+			}
+			attributeResources();
+				nextPlayer();
+			}
+		}*/
 	}
 
 	private int FindCardTypeFromStack(int rand){
@@ -173,14 +184,12 @@ public class Game {
 
 
 
-	public Player whoWin(){
-		Player winner=null;
+	public void whoWin(){
 		for(Player player: playerList){
 			if(player.getScore()==scoreToWin){
-				winner=player;
+				WinnerBox.display(player);
 			}
 		}
-		return winner;
 	}
 
 	public void nextPlayer(){
@@ -197,7 +206,7 @@ public class Game {
 			playerTurn=playerList.get(0);
 		}
 	}
-
+	
 	public void previousPlayer(){
 		if(playerTurn == playerList.get(0)){
 			playerTurn=playerList.get(3);
@@ -324,7 +333,6 @@ public class Game {
 		if (p.CheckResource(1, 1, 1, 0) && r.getStatus()==StatusRoadType.EMPTY && m.checkNeighbourR(r, p) && m.checkTP(p))
 		{
 			r.setStatus(p.chooseRoadStatus());
-			p.setScore(p.getScore()+1);
 			p.getResourceInventory().addEnergy(-1);
 			p.getResourceInventory().addConstruction(-1);
 			p.getResourceInventory().addFood(-1);
@@ -378,8 +386,71 @@ public class Game {
 				p.setFirstDelorean(true);
 			} else {
 				p.setSecondDelorean(true);
+			}		
+		}
+	}
+	
+	public void firstArmy()
+	{System.out.println("First army");
+		for(Player p : playerList)
+		{
+			if(p.getKnightPoint()>=3 && cmpArmy()==p)
+			{	for(Player P : playerList)
+				{
+					if(P.isFirstKnight())
+					{
+					  P.setScore(P.getScore()-2);
+					}
+					
+				P.setFirstKnight(false);
+				
+				
+				}
+			p.setFirstKnight(true);
+			System.out.println("joueur" + p.getName() + "   " + p.isFirstKnight());
+			p.setScore(p.getScore()+2);
+			System.out.println(p.getScore());
+				
+
+			}
+			else if(p.getKnightPoint()>=3 && cmpArmy()==null)
+			{	System.out.println("AAAA");
+				for(Player P : playerList)
+				{
+					if(P.isFirstKnight())
+					{
+					  P.setScore(P.getScore()-2);
+					}
+					
+				P.setFirstKnight(false);
+				
+				
+				}
+			
+			
+
 			}
 		}
+	}
+	public Player cmpArmy()
+	{Player win=null;
+		int max=0;
+		
+		for(Player p : playerList)
+		{
+			if(p.getKnightPoint()>max)
+			{max=p.getKnightPoint();
+			win=p;
+			System.out.println(win.getName());
+			}
+			else if(p.getKnightPoint()==max)
+			{win=null;}
+			
+		}
+		
+
+		return win;
+		
 	}
 
 	public Player getPlayerTurn() {
@@ -422,15 +493,15 @@ public class Game {
 	public Boolean isFirstTurn() {
 		return firstTurn;
 	}
-
+	
 	public void setFirstTurn(Boolean bool) {
 		firstTurn = bool;
 	}
-
+	
 	public Boolean isSecondTurn() {
 		return secondTurn;
 	}
-
+	
 	public void setSecondTurn(Boolean bool) {
 		secondTurn = bool;
 	}

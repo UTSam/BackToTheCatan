@@ -12,6 +12,18 @@ public class Player {
 	private boolean hasLongestRoad;
 	private int nbCard;
 	private int knightPoint;
+	private boolean firstKnight;
+	public boolean isFirstKnight() {
+		return firstKnight;
+	}
+
+	public void setFirstKnight(boolean firstKnight) {
+		this.firstKnight = firstKnight;
+	}
+
+	public void setKnightPoint(int knightPoint) {
+		this.knightPoint = knightPoint;
+	}
 
 	private Boolean firstRoad;
 	private Boolean firstDelorean;

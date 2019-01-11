@@ -62,6 +62,7 @@ public class ActionBar {
 			for (PlayerView pv : gameView.getPlayerViewList()) {
 				pv.refresh();
 			}
+			gameView.getGame().whoWin();
 			DiceBox.display(gameView.getGame());
 		} );
 		bankButton.setOnAction(e->BankBox.display(gameView));

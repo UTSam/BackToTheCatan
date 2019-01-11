@@ -49,7 +49,7 @@ public class Card {
 			player.increaseKnightPoint();
 			break;
 		case Monopole:
-			ActivateMonopoleEffect();
+			//ActivateMonopoleEffect();
 			break;
 		case RoadConstruction:
 			ActivateRoadConstructionEffect();
@@ -68,7 +68,7 @@ public class Card {
 	}
 
 	public void ActivateKnightEffect(Tile tile){/*TODO*/  // Il faudra juste après l'appel de la fonction remettre l'ancien tuile voleur en false ( en faisant une recherche parmis toutes les tuiles)
-		tile.setThief(true);
+		/*tile.setThief(true);
 		int a=0;
 		ArrayList<Player> PlayerListTemp = new ArrayList<Player>();
 		for (Player play : game.getPlayerList() )
@@ -116,7 +116,8 @@ public class Card {
         if(rand==3)
         {
         	PlayerListTemp.get(a).getResourceInventory().setConstruction(PlayerListTemp.get(a).getResourceInventory().getConstruction()-1);
-        }
+        }*/
+		player.addKnightPoint();
 
 
 
@@ -126,10 +127,8 @@ public class Card {
 	}
 
 	public void ActivateMonopoleEffect(){/*TODO*/
-		int nb=0;
-		Scanner sc = new Scanner(System.in);
-		char R = sc.next().charAt(0);
-
+		/*int nb=0;
+		
 		switch (R)
 		{case 'E' :
 
@@ -196,9 +195,7 @@ public class Card {
 			player.getResourceInventory().setGold(nb + player.getResourceInventory().getGold());
 		break;
 
-		}
-
-		/* CLICK SYSTEM */
+		}*/
 	}
 
 	public void ActivateRoadConstructionEffect(){/*TODO*/

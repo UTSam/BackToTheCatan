@@ -252,7 +252,7 @@ public class TradeBox {
 		ImageView constructionView1 = new ImageView(gv.iManager.getConstructionIcon());
 		constructionView1.setFitWidth(size);
 		constructionView1.setFitHeight(size);
-		gridPane.add(constructionView1, 4, 1);
+		gridPane.add(constructionView1, 3, 1);
 
 		ImageView foodView2 = new ImageView(gv.iManager.getFoodIcon());
 		foodView2.setFitWidth(size);

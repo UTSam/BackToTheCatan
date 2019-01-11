@@ -22,6 +22,7 @@ public class WinnerBox {
 		
 		Button close = new Button("Fermer");
 		close.setPrefSize(200, 100);
+		close.setOnAction(e -> window.close());
 		
 		VBox vBox = new VBox();
 		vBox.getChildren().addAll(label, close);
