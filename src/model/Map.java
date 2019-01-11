@@ -349,9 +349,32 @@ public class Map {
 	}
 	public boolean checkMapEdge(Node n)
 	{
-		if (this.name=="1955" || this.name=="1985")
+		//if (this.name=="1955" || this.name=="1985")
 		{
-				if (n.equals(this.nodeList[1][9])||n.equals(this.nodeList[1][10])||n.equals(this.nodeList[2][10])||n.equals(this.nodeList[2][11])||n.equals(this.nodeList[3][11])||n.equals(this.nodeList[3][12])||n.equals(this.nodeList[4][11])||n.equals(this.nodeList[4][12])||n.equals(this.nodeList[5][10])||n.equals(this.nodeList[5][11])||n.equals(this.nodeList[6][9])||n.equals(this.nodeList[6][10]))
+				if (n.equals(this.nodeList[1][9])||
+						n.equals(this.nodeList[1][10])||
+						n.equals(this.nodeList[2][10])||
+						n.equals(this.nodeList[2][11])||
+						n.equals(this.nodeList[3][11])||
+						n.equals(this.nodeList[3][12])||
+						n.equals(this.nodeList[4][11])||
+						n.equals(this.nodeList[4][12])||
+						n.equals(this.nodeList[5][10])||
+						n.equals(this.nodeList[5][11])||
+						n.equals(this.nodeList[6][9])||
+						n.equals(this.nodeList[6][10])||
+						n.equals(this.nodeList[1][5])||
+						n.equals(this.nodeList[1][4])||
+						n.equals(this.nodeList[2][4])||
+						n.equals(this.nodeList[2][3])||
+						n.equals(this.nodeList[3][3])||
+						n.equals(this.nodeList[3][2])||
+						n.equals(this.nodeList[4][2])||
+						n.equals(this.nodeList[4][3])||
+						n.equals(this.nodeList[5][3])||
+						n.equals(this.nodeList[5][4])||
+						n.equals(this.nodeList[6][4])||
+						n.equals(this.nodeList[6][5]))
 				{
 				return true;
 				}
