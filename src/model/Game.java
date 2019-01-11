@@ -59,7 +59,7 @@ public class Game {
 		initializeResourceList();
 	}
 
-	private void generatePlayerList(){ /* A ENLEVER */
+	private void generatePlayerList(){
 
 		playerList=new ArrayList<Player>();
 
@@ -148,17 +148,7 @@ public class Game {
 	}
 
 	public void Run(){
-		/*boolean hasWin=false;
-		while(hasWin=false){
-			for(Player player: playerList){
-				if (player.getScore()>=scoreToWin){
-					hasWin=true;
-				}
-			}
-			attributeResources();
-				nextPlayer();
-			}
-		}*/
+
 	}
 
 	private int FindCardTypeFromStack(int rand){
@@ -207,7 +197,7 @@ public class Game {
 			playerTurn=playerList.get(0);
 		}
 	}
-	
+
 	public void previousPlayer(){
 		if(playerTurn == playerList.get(0)){
 			playerTurn=playerList.get(3);
@@ -221,10 +211,6 @@ public class Game {
 		else {
 			playerTurn=playerList.get(2);
 		}
-	}
-
-	public int throwDice(){
-		return (int) (Math.random()*11)+2;
 	}
 
 	/* TODO A CHECK */
@@ -392,7 +378,7 @@ public class Game {
 				p.setFirstDelorean(true);
 			} else {
 				p.setSecondDelorean(true);
-			}		
+			}
 		}
 	}
 
@@ -436,15 +422,15 @@ public class Game {
 	public Boolean isFirstTurn() {
 		return firstTurn;
 	}
-	
+
 	public void setFirstTurn(Boolean bool) {
 		firstTurn = bool;
 	}
-	
+
 	public Boolean isSecondTurn() {
 		return secondTurn;
 	}
-	
+
 	public void setSecondTurn(Boolean bool) {
 		secondTurn = bool;
 	}
