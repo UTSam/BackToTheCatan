@@ -186,7 +186,7 @@ public class Game {
 
 	public void whoWin(){
 		for(Player player: playerList){
-			if(player.getScore()==scoreToWin){
+			if(player.getScore()>=scoreToWin){
 				WinnerBox.display(player);
 			}
 		}
